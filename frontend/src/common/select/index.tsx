@@ -1,30 +1,34 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { SelectHTMLAttributes } from "react";
 
 interface Opcao{
     value:string;
     label:string;
 }
-interface InputProps extends InputHTMLAttributes<HTMLInputElement>
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>
 {
     id?:string;
     name:string;
     label:string;
     opcoes:Array<Opcao>;
     className:string;
+    selectClassName?:string;
+    labelClassName?:string;
 }
-export const Select:React.FC<InputProps> = ({
+export const Select:React.FC<SelectProps> = ({
     id,
     name,
     label,
     opcoes,
-    className
-}: InputProps) =>
+    className,
+    selectClassName,
+    labelClassName
+}: SelectProps) =>
 {
     return(
         <div className={className}>
-            <label htmlFor={id}>{label}</label>
+            <label htmlFor={id} className={labelClassName}>{label}</label>
             <div>
-                <select name={name} id={id}>
+                <select name={name} id={id} className={selectClassName}>
                     {
                         opcoes.map((opcao)=>
                         (

@@ -4,6 +4,7 @@ interface LayoutProps{
     titulo:string;
     children?:ReactNode;
     className?:string;
+    tittleClassName?:string
 }
 export const Layout:React.FC<LayoutProps> = (props:LayoutProps) =>
 {
@@ -14,7 +15,7 @@ export const Layout:React.FC<LayoutProps> = (props:LayoutProps) =>
                 <div className={`container ${props.className}`}>
                     <div>
                         <header>
-                            <p>{props.titulo}</p>
+                            <p className={props.tittleClassName}>{props.titulo}</p>
                         </header>    
                     </div>
             

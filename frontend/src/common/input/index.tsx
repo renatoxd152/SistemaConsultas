@@ -8,6 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>
     TextLabel:string;
     error?:string;
     className?:string;
+    inputClassName?:string;
 }
 export const Input:React.FC<InputProps> = ({
     id,
@@ -15,14 +16,15 @@ export const Input:React.FC<InputProps> = ({
     onChange,
     TextLabel,
     error,
-    className
+    className,
+    inputClassName
 }:InputProps) =>
 {
     return(
         <div className={className}>
             <label htmlFor={id}>{TextLabel}</label>
             <div>
-                <input type={type} id={id} onChange={onChange} />
+                <input type={type} id={id} onChange={onChange} className={inputClassName} />
             </div>
             {
                 error &&

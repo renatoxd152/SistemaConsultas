@@ -92,13 +92,19 @@ export const ConsultasForm:React.FC<ConsultasFormProps> = ({
                 <Select id="medico" name="medico" label="Selecione o médico:" opcoes={medicos} className="col"/>
                 <Select id="paciente" name="paciente" label="Selecione o paciente:" opcoes={pacientes} className="col"/>
                 <Input id="data" type="time" onChange={formik.handleChange} TextLabel="Escolha a data" error={formik.errors.dataHora} className="col"/>
+            </div>
+            <div className="row">
                 <Input id="motivo" type="text" onChange={formik.handleChange} TextLabel="Motivo da consulta:" error={formik.errors.motivoConsulta} className="col"/>
                 <Select id="tipoConsulta" name="tipoConsulta" label="Tipo da consulta:" opcoes={tipo} className="col"/>
                 <Select id="status" name="status" label="Status:" opcoes={status} className="col"/>
+            </div>
+            <div className="row">
+
                 <Input id="observacoes" type="text" onChange={formik.handleChange} TextLabel="Observações:" error={formik.errors.observações} className="col"/>
                 <Input id="prescricaoMedica" type="text" onChange={formik.handleChange} TextLabel="Prescrição médica:" error={formik.errors.prescricaoMedica} className="col"/>
-                <button type="submit">Cadastrar consulta</button>
             </div>
+                <button type="submit" className="btn btn-primary p-2">Cadastrar consulta</button>
+        
         </form>
     )
 }

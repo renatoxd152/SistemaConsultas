@@ -1,7 +1,7 @@
 import { Column } from "primereact/column";
 import { DataTable, DataTableStateEvent } from 'primereact/datatable';
 import React, { useState } from "react";
-import { Page } from '../../../../app/models/common/page';
+import { Page } from "../../../app/models/common/page";
 import { Medico } from "../../../app/models/medicos";
 import { useMedicoService } from "../../../app/services/medicos.service";
 import { Layout } from "../../layout";
@@ -26,7 +26,7 @@ export const Listagem: React.FC = () =>
         })
     }
     return(
-        <Layout titulo="Listagem de médicos">
+        <Layout titulo="Listagem de médicos" tittleClassName="h1 display-6 fw-bold text-primary mt-4" className="text-center">
             <DataTable value={medicos.content} totalRecords={medicos.totalElements}
              lazy paginator first={medicos.first} rows={medicos.size} onPage={handlePage} 
              emptyMessage="Nenhum registro encontrado">

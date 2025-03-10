@@ -9,7 +9,7 @@ export const CadastroMedico:React.FC = () =>
         console.log("oi")
     }
     return(
-        <Layout titulo="Cadastro de Médicos" className="text-center">
+        <Layout titulo="Cadastro de Médicos" tittleClassName="h1 display-6 fw-bold text-primary mt-4" className="text-center">
             <MedicoForm onSubmit={handleSubmit}/>
         </Layout>
     )
