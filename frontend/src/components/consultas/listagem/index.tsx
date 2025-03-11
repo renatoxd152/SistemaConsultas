@@ -26,7 +26,7 @@ export const ListagemConsultas: React.FC = () =>
         })
     }
     return(
-        <Layout titulo="Listagem de consultas">
+        <Layout titulo="Listagem de consultas" tittleClassName="h1 display-6 fw-bold text-primary mt-4" className="text-center">
             <DataTable value={consultas.content} totalRecords={consultas.totalElements}
              lazy paginator first={consultas.first} rows={consultas.size} onPage={handlePage} 
              emptyMessage="Nenhum registro encontrado">

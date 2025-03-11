@@ -10,7 +10,7 @@ export const CadastroConsulta:React.FC = () =>
         console.log("oi")
     }
     return(
-        <Layout titulo="Consultas Médicas">
+        <Layout titulo="Consultas Médicas" tittleClassName="h1 display-6 fw-bold text-primary mt-4 text-center">
             <ConsultasForm onSubmit={handleSubmit}/>
         </Layout>
     )
