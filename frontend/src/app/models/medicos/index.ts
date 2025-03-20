@@ -13,6 +13,6 @@ export interface Medico
     estadoCRM:string;
     especialidade:string;
     subespecialidade:string;
-    anoConclusao:string;
+    anoConclusao:number;
 
 }

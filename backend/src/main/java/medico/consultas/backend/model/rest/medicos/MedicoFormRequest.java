@@ -1,0 +1,169 @@
+package medico.consultas.backend.model.rest.medicos;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import medico.consultas.backend.model.Consultas;
+import medico.consultas.backend.model.Medico;
+
+public class MedicoFormRequest {
+	private Long id;
+	private String nome;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDate dataNascimento;
+	private String genero;
+	private String cpf;
+	private String rg;
+	private String telefone;
+	private String email;
+	private String numeroCRM;
+	private String estadoCRM;
+	private String especialidade;
+	private String subespecialidade;
+	private int anoConclusao;
+    private List<Consultas> consultas;
+    
+    
+	public MedicoFormRequest(Long id, String nome, LocalDate dataNascimento, String genero, String cpf, String rg,
+			String telefone, String email, String numeroCRM, String estadoCRM, String especialidade,
+			String subespecialidade, int anoConclusao, List<Consultas> consultas) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.genero = genero;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.telefone = telefone;
+		this.email = email;
+		this.numeroCRM = numeroCRM;
+		this.estadoCRM = estadoCRM;
+		this.especialidade = especialidade;
+		this.subespecialidade = subespecialidade;
+		this.anoConclusao = anoConclusao;
+		this.consultas = consultas;
+	}
+	
+	
+	
+	public MedicoFormRequest() {
+		super();
+	}
+
+	public static MedicoFormRequest fromModel(Medico medico)
+	{
+		return new MedicoFormRequest(
+				medico.getId(),medico.getNome(),medico.getDataNascimento(),medico.getGenero(),medico.getCpf(),medico.getRg(),
+				medico.getTelefone(),medico.getEmail(),medico.getNumeroCRM(),medico.getEstadoCRM(),medico.getEspecialidade(),
+				medico.getSubespecialidade(),medico.getAnoConclusao(),
+				medico.getConsultas()
+				 );
+	}
+	
+	public Medico toModel()
+	{
+		return new Medico(id,nome,dataNascimento,genero,rg,cpf,telefone,email,numeroCRM,estadoCRM,especialidade,subespecialidade,anoConclusao,consultas);
+	}
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	public String getRg() {
+		return rg;
+	}
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getNumeroCRM() {
+		return numeroCRM;
+	}
+	public void setNumeroCRM(String numeroCRM) {
+		this.numeroCRM = numeroCRM;
+	}
+	public String getEstadoCRM() {
+		return estadoCRM;
+	}
+	public void setEstadoCRM(String estadoCRM) {
+		this.estadoCRM = estadoCRM;
+	}
+	public String getEspecialidade() {
+		return especialidade;
+	}
+	public void setEspecialidade(String especialidade) {
+		this.especialidade = especialidade;
+	}
+	public String getSubespecialidade() {
+		return subespecialidade;
+	}
+	public void setSubespecialidade(String subespecialidade) {
+		this.subespecialidade = subespecialidade;
+	}
+	public int getAnoConclusao() {
+		return anoConclusao;
+	}
+	public void setAnoConclusao(int anoConclusao) {
+		this.anoConclusao = anoConclusao;
+	}
+	public List<Consultas> getConsultas() {
+		return consultas;
+	}
+	public void setConsultas(List<Consultas> consultas) {
+		this.consultas = consultas;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "MedicoFormRequest [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", genero="
+				+ genero + ", cpf=" + cpf + ", rg=" + rg + ", telefone=" + telefone + ", email=" + email
+				+ ", numeroCRM=" + numeroCRM + ", estadoCRM=" + estadoCRM + ", especialidade=" + especialidade
+				+ ", subespecialidade=" + subespecialidade + ", anoConclusao=" + anoConclusao + ", consultas="
+				+ consultas + "]";
+	}
+	
+    
+    
+	
+}

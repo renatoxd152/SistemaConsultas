@@ -30,7 +30,7 @@ const formScheme:Medico = {
     estadoCRM:"",
     especialidade:"",
     subespecialidade:"",
-    anoConclusao:"",
+    anoConclusao:0,
 }
 export const MedicoForm:React.FC<MedicoFormProps> = ({
     onSubmit
