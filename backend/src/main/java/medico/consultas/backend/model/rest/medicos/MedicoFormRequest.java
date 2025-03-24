@@ -1,9 +1,6 @@
 package medico.consultas.backend.model.rest.medicos;
-
-import java.time.LocalDate;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import medico.consultas.backend.model.Consultas;
 import medico.consultas.backend.model.Medico;
@@ -11,8 +8,7 @@ import medico.consultas.backend.model.Medico;
 public class MedicoFormRequest {
 	private Long id;
 	private String nome;
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 	private String genero;
 	private String cpf;
 	private String rg;
@@ -26,7 +22,7 @@ public class MedicoFormRequest {
     private List<Consultas> consultas;
     
     
-	public MedicoFormRequest(Long id, String nome, LocalDate dataNascimento, String genero, String cpf, String rg,
+	public MedicoFormRequest(Long id, String nome, String dataNascimento, String genero, String cpf, String rg,
 			String telefone, String email, String numeroCRM, String estadoCRM, String especialidade,
 			String subespecialidade, int anoConclusao, List<Consultas> consultas) {
 		super();
@@ -48,23 +44,63 @@ public class MedicoFormRequest {
 	
 	
 	
+	
+	
+	public MedicoFormRequest(String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
+			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
+			int anoConclusao) {
+		super();
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.genero = genero;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.telefone = telefone;
+		this.email = email;
+		this.numeroCRM = numeroCRM;
+		this.estadoCRM = estadoCRM;
+		this.especialidade = especialidade;
+		this.subespecialidade = subespecialidade;
+		this.anoConclusao = anoConclusao;
+	}
+
+
+
+
+
+	public MedicoFormRequest(Long id, String nome, String dataNascimento, String genero, String cpf, String rg,
+			String telefone, String email, String numeroCRM, String estadoCRM, String especialidade,
+			String subespecialidade, int anoConclusao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.genero = genero;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.telefone = telefone;
+		this.email = email;
+		this.numeroCRM = numeroCRM;
+		this.estadoCRM = estadoCRM;
+		this.especialidade = especialidade;
+		this.subespecialidade = subespecialidade;
+		this.anoConclusao = anoConclusao;
+	}
+
 	public MedicoFormRequest() {
 		super();
 	}
 
 	public static MedicoFormRequest fromModel(Medico medico)
 	{
-		return new MedicoFormRequest(
-				medico.getId(),medico.getNome(),medico.getDataNascimento(),medico.getGenero(),medico.getCpf(),medico.getRg(),
+		return new MedicoFormRequest(medico.getId(),medico.getNome(),medico.getDataNascimento(),medico.getGenero(),medico.getCpf(),medico.getRg(),
 				medico.getTelefone(),medico.getEmail(),medico.getNumeroCRM(),medico.getEstadoCRM(),medico.getEspecialidade(),
-				medico.getSubespecialidade(),medico.getAnoConclusao(),
-				medico.getConsultas()
-				 );
+				medico.getSubespecialidade(),medico.getAnoConclusao());
 	}
 	
 	public Medico toModel()
 	{
-		return new Medico(id,nome,dataNascimento,genero,rg,cpf,telefone,email,numeroCRM,estadoCRM,especialidade,subespecialidade,anoConclusao,consultas);
+		return new Medico(nome,dataNascimento,genero,rg,cpf,telefone,email,numeroCRM,estadoCRM,especialidade,subespecialidade,anoConclusao);
 	}
 
 	public Long getId() {
@@ -79,10 +115,10 @@ public class MedicoFormRequest {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public LocalDate getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getGenero() {

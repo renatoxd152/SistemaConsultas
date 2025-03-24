@@ -1,6 +1,4 @@
 package medico.consultas.backend.model;
-
-import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -20,12 +18,12 @@ public class Medico {
 	@Column(name="nome",length = 100)
 	private String nome;
 	@Column(name="dataNascimento")
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 	@Column(name="genero",length = 10)
 	private String genero;
 	@Column(name="cpf",length = 14)
 	private String cpf;
-	@Column(name="rg",length = 13)
+	@Column(name="rg")
 	private String rg;
 	@Column(name="telefone",length = 14)
 	private String telefone;
@@ -47,7 +45,7 @@ public class Medico {
 	
 	
 	
-	public Medico(Long id, String nome, LocalDate dataNascimento, String genero, String cpf, String rg, String telefone,
+	public Medico(Long id, String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
 			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
 			int anoConclusao, List<Consultas> consultas) {
 		super();
@@ -68,7 +66,7 @@ public class Medico {
 	}
 	
 	
-	public Medico(String nome, LocalDate dataNascimento, String genero, String cpf, String rg, String telefone,
+	public Medico(String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
 			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
 			int anoConclusao, List<Consultas> consultas) {
 		super();
@@ -88,6 +86,48 @@ public class Medico {
 	}
 
 
+	
+
+
+	public Medico(String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
+			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
+			int anoConclusao) {
+		super();
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.genero = genero;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.telefone = telefone;
+		this.email = email;
+		this.numeroCRM = numeroCRM;
+		this.estadoCRM = estadoCRM;
+		this.especialidade = especialidade;
+		this.subespecialidade = subespecialidade;
+		this.anoConclusao = anoConclusao;
+	}
+
+	
+	
+
+	public Medico(Long id, String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
+			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
+			int anoConclusao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.genero = genero;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.telefone = telefone;
+		this.email = email;
+		this.numeroCRM = numeroCRM;
+		this.estadoCRM = estadoCRM;
+		this.especialidade = especialidade;
+		this.subespecialidade = subespecialidade;
+		this.anoConclusao = anoConclusao;
+	}
 
 
 	public Medico() {
@@ -110,11 +150,11 @@ public class Medico {
 		this.nome = nome;
 	}
 
-	public LocalDate getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

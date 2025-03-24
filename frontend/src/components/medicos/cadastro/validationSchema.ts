@@ -1,12 +1,12 @@
 import * as yup from 'yup';
 const campoObrigatorioMensagem = "Campo obrigatório";
+const generosPermitidos = ["1","2"];
 export const validationScheme = yup.object().shape(
     {
         nome:yup.string().trim().required(campoObrigatorioMensagem),
         dataNascimento:yup.string().trim().required(campoObrigatorioMensagem).length(10,"Data Inválida"),
-        genero:yup.string().trim().required(campoObrigatorioMensagem),
-        cpf:yup.string().trim().required(campoObrigatorioMensagem).length(15,"O CPF está no formato errado"),
-        rg:yup.string().trim().required(campoObrigatorioMensagem).length(15,"O CPF está no formato errado"),
+        cpf:yup.string().trim().required(campoObrigatorioMensagem).length(14,"O CPF está no formato errado"),
+        rg:yup.string().trim().required(campoObrigatorioMensagem).length(12,"O CPF está no formato errado"),
         endereco:yup.string().trim().required(campoObrigatorioMensagem),
         telefone:yup.string().trim().required(campoObrigatorioMensagem),
         email:yup.string().trim().required(campoObrigatorioMensagem).email("Email Inválido"),

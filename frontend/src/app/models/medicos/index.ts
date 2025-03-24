@@ -1,6 +1,6 @@
 export interface Medico
 {
-    id:number;
+    id?:number;
     nome:string;
     dataNascimento:string;
     genero:string;

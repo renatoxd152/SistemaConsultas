@@ -21,14 +21,15 @@ export const Select:React.FC<SelectProps> = ({
     opcoes,
     className,
     selectClassName,
-    labelClassName
+    labelClassName,
+    onChange,
 }: SelectProps) =>
 {
     return(
         <div className={className}>
             <label htmlFor={id} className={labelClassName}>{label}</label>
             <div>
-                <select name={name} id={id} className={selectClassName}>
+                <select name={name} id={id} className={selectClassName} onChange={onChange}>
                     {
                         opcoes.map((opcao)=>
                         (

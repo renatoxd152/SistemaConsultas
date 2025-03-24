@@ -17,14 +17,16 @@ export const Input:React.FC<InputProps> = ({
     TextLabel,
     error,
     className,
-    inputClassName
+    inputClassName,
+    ...props
+    
 }:InputProps) =>
 {
     return(
         <div className={className}>
             <label htmlFor={id}>{TextLabel}</label>
             <div>
-                <input type={type} id={id} onChange={onChange} className={inputClassName} />
+                <input type={type} id={id} onChange={onChange} className={inputClassName} {...props}/>
             </div>
             {
                 error &&
