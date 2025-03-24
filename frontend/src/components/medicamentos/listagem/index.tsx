@@ -15,7 +15,6 @@ export const ListagemMedicamentos:React.FC = () =>
         size:10,
         totalElements:0,
     })
-    console.log(medicamentos)
     const service = useMedicamentoService()
     const handlePage = (event:DataTableStateEvent | null)=>
     {

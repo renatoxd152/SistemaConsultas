@@ -16,8 +16,17 @@ export const useMedicoService = () =>
         return response.data;
     }
 
+     const pages = async( page:number =0,
+            size:number =10):Promise<Page<Medico>> =>
+        {
+            const url = `${resourceURL}/listar/paginas?page=${page}&size=${size}`
+            const response: AxiosResponse<Page<Medico>> = await httpClient.get(url);
+            return response.data;
+        }
+
     return{
         salvar,
-        listar
+        listar,
+        pages
     }
 }

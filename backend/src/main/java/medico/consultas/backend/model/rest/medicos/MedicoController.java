@@ -1,6 +1,8 @@
 package medico.consultas.backend.model.rest.medicos;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import medico.consultas.backend.model.Medico;
 import medico.consultas.backend.model.repository.MedicoRepository;
+import medico.consultas.backend.model.rest.medicamentos.MedicamentosFormRequest;
 
 @RestController
 @RequestMapping("/api/medicos")
@@ -44,6 +47,12 @@ public class MedicoController {
 			medicoRepository.delete(medico);
 			return ResponseEntity.noContent().build();
 		}).orElseGet(()->ResponseEntity.notFound().build());
+	}
+	
+	@GetMapping("/listar/paginas")
+	public Page<MedicoFormRequest> getLista(Pageable pageable)
+	{
+		return medicoRepository.findAll(pageable).map(MedicoFormRequest::fromModel);
 	}
 
 }
