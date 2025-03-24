@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Medico } from "../../../app/models/medicos";
-import { Input } from "../../../common/input";
-import { Select } from "../../../common/select";
+import { Input } from "../../common/input";
+import { Select } from "../../common/select";
 import { validationScheme } from "./validationSchema";
 interface MedicoFormProps
 {

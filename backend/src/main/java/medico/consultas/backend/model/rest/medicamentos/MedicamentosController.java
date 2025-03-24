@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,5 +54,11 @@ public class MedicamentosController {
 			medicamentoRepository.delete(medicamento);
 			return ResponseEntity.noContent().build();
 		}).orElseGet(()->ResponseEntity.notFound().build());
+	}
+	
+	@GetMapping("/listar/paginas")
+	public Page<MedicamentosFormRequest> getLista(Pageable pageable)
+	{
+		return medicamentoRepository.findAll(pageable).map(MedicamentosFormRequest::fromModel);
 	}
 }

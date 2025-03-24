@@ -39,6 +39,19 @@ const rotas = [
         ]
     
     },
+    {
+        label:"Medicamentos",
+        children:[
+            {
+                label:"Cadastrar Medicamentos",
+                to:"/medicamentos"
+            },
+            {
+                label:"Medicamentos cadastrados",
+                to:"/medicamentos/listar"
+            }
+        ]
+    }
 
 ]
 const Itens: React.FC = () => {

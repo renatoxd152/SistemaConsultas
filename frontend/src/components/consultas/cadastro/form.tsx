@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Consulta } from "../../../app/models/consultas";
-import { Input } from "../../../common/input";
-import { Select } from "../../../common/select";
+import { Input } from "../../common/input";
+import { Select } from "../../common/select";
 import { validationScheme } from "../validationSchema";
 interface ConsultasFormProps{
     onSubmit:(consulta:Consulta)=>void;
