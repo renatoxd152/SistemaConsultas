@@ -13,6 +13,8 @@
     "@types/react-dom": "^19.0.4",
     "axios": "^1.8.1",
     "bootstrap": "^5.3.3",
+    "data-fns": "^1.1.0",
+    "date-fns": "^4.1.0",
     "formik": "^2.4.6",
     "primereact": "^10.9.2",
     "react": "^19.0.0",

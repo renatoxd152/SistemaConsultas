@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 import { httpClient } from '../htpp'
 import { Page } from "../models/common/page"
 import { Consulta } from '../models/consultas'
-const resourceURL:string = "/api/medicos"
+const resourceURL:string = "/api/consultas"
 export const useConsultaService = () =>
 {
     const salvar = async (consulta:Consulta) =>
@@ -15,9 +15,15 @@ export const useConsultaService = () =>
         const response:AxiosResponse<Page<Consulta>> = await httpClient.get(resourceURL);
         return response.data;
     }
+    const deletar = async (id:any) : Promise<void> =>
+    {
+        const url:string = `${resourceURL}/${id}`
+        await httpClient.delete(url);
+    }
 
     return{
         salvar,
-        listar
+        listar,
+        deletar
     }
 }

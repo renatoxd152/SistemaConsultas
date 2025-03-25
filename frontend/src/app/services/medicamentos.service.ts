@@ -10,9 +10,9 @@ export const useMedicamentoService = () =>
         const response: AxiosResponse<Medicamento> = await httpClient.post<Medicamento>(resourceURL,medicamento);
         return response.data;
     }
-    const listar = async(): Promise<Page<Medicamento>> =>
+    const listar = async(): Promise<Medicamento[]> =>
     {
-        const response:AxiosResponse<Page<Medicamento>> = await httpClient.get(resourceURL);
+        const response:AxiosResponse<Medicamento[]> = await httpClient.get(resourceURL);
         return response.data;
     }
 

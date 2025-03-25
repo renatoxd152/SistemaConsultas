@@ -1,43 +1,39 @@
-import { Column } from "primereact/column";
-import { DataTable, DataTableStateEvent } from 'primereact/datatable';
-import React, { useState } from "react";
-import { Page } from "../../../app/models/common/page";
+import { AxiosResponse } from "axios";
+import React, { useEffect, useState } from "react";
+import useSWR from "swr";
+import { httpClient } from "../../../app/htpp";
 import { Consulta } from "../../../app/models/consultas";
 import { useConsultaService } from "../../../app/services/consultas.service";
+import { Alert } from "../../common/mensagem";
 import { Layout } from "../../layout";
+import { TabelaConsultas } from "./tabela";
 export const ListagemConsultas: React.FC = () =>
 {
-
+    const[consultas,setConsultas] = useState<Consulta[]>()
+    const[mensagens,setMensagens] = useState<Array<Alert>>([])
+    const{data:result} = useSWR<AxiosResponse<Consulta[]>>("/api/consultas",(url:string)=>httpClient.get(url))
     const service = useConsultaService();
-    
-    const[consultas,setConsultas] = useState<Page<Consulta>>({
-        content:[],
-        first:0,
-        number:0,
-        size:10,
-        totalElements:0
-    })
+    useEffect(()=>{
+        setConsultas(result?.data || [])
+    },[result])
+    console.log(result)
 
-    const handlePage = (event:DataTableStateEvent | null) =>
+    const deletar = (consulta:Consulta)=>
     {
-        service.listar().then(result=>
+        service.deletar(consulta.id).then(response=>
         {
-            setConsultas({...result,first:event?.first??0})
+            setConsultas(prevConsultas => prevConsultas?.filter(c => c.id !== consulta.id) || []);
+            setMensagens([{field:"alert alert-success",texto:"Consulta deletada com sucesso!"}])
+        })
+        .catch(error=>
+        {
+            setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao deletar a consulta!"}])
         })
     }
+    
     return(
-        <Layout titulo="Listagem de consultas" tittleClassName="h1 display-6 fw-bold text-primary mt-4" className="text-center">
-            <DataTable value={consultas.content} totalRecords={consultas.totalElements}
-             lazy paginator first={consultas.first} rows={consultas.size} onPage={handlePage} 
-             emptyMessage="Nenhum registro encontrado">
-                <Column field="id" header="Código"/>
-                <Column field="medico" header="Médico"/>
-                <Column field="paciente" header="Paciente"/>
-                <Column field="data" header="Data/Horário"/>
-                <Column field="motivo" header="Motivo"/>
-                <Column field="prescricao" header="Prescrição Médica"/>
-
-            </DataTable>
+        <Layout titulo="Listagem de consultas" tittleClassName="h1 display-6 fw-bold text-primary mt-4" className="text-center" mensagens={mensagens}>
+            <TabelaConsultas onDelete={deletar} consultas={consultas || [] }/>
         </Layout>
     )
 }

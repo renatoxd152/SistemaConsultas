@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 const campoObrigatorioMensagem = "Campo obrigatório";
-const generosPermitidos = ["1","2"];
 export const validationScheme = yup.object().shape(
     {
         nome:yup.string().trim().required(campoObrigatorioMensagem),

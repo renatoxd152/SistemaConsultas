@@ -10,9 +10,15 @@ export const useMedicoService = () =>
         const response: AxiosResponse<Medico> = await httpClient.post<Medico>(resourceURL,medico);
         return response.data;
     }
-    const listar = async(): Promise<Page<Medico>> =>
+    const listar = async(): Promise<Medico[]> =>
     {
-        const response:AxiosResponse<Page<Medico>> = await httpClient.get(resourceURL);
+        const response:AxiosResponse<Medico[]> = await httpClient.get(resourceURL);
+        return response.data;
+    }
+    const getById = async (id:number) :Promise<Medico>=>
+    {
+        const url = `${resourceURL}/${id}`;
+        const response:AxiosResponse<Medico> = await httpClient.get(url);
         return response.data;
     }
 
@@ -27,6 +33,7 @@ export const useMedicoService = () =>
     return{
         salvar,
         listar,
-        pages
+        pages,
+        getById
     }
 }

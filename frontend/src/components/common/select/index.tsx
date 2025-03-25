@@ -1,15 +1,11 @@
 import React, { SelectHTMLAttributes } from "react";
 
-interface Opcao{
-    value:string;
-    label:string;
-}
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement>
 {
     id?:string;
     name:string;
     label:string;
-    opcoes:Array<Opcao>;
+    opcoes:any[];
     className:string;
     selectClassName?:string;
     labelClassName?:string;
@@ -23,13 +19,14 @@ export const Select:React.FC<SelectProps> = ({
     selectClassName,
     labelClassName,
     onChange,
+    ...props
 }: SelectProps) =>
 {
     return(
         <div className={className}>
             <label htmlFor={id} className={labelClassName}>{label}</label>
             <div>
-                <select name={name} id={id} className={selectClassName} onChange={onChange}>
+                <select name={name} id={id} className={selectClassName} onChange={onChange} {...props}>
                     {
                         opcoes.map((opcao)=>
                         (

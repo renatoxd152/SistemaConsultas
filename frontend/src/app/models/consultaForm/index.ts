@@ -1,11 +1,8 @@
-import { Medico } from "../medicos";
-import { Paciente } from "../pacientes";
-
-export interface Consulta
+export interface ConsultaCadastroForm
 {
     id:string;
-    medico:Medico;
-    paciente:Paciente;
+    medico_id:number;
+    paciente_id:number;
     data:string;
     hora:string;
     motivo:string;

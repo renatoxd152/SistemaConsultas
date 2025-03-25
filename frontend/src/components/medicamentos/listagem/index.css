@@ -1,25 +1,25 @@
 .custom-paginator .p-paginator {
-    background-color: #f8f9fa; /* Cor de fundo */
-    padding: 10px; /* Espaçamento */
-    border-radius: 5px; /* Bordas arredondadas */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .custom-paginator .p-paginator-page {
-    color: #007bff; /* Cor do texto das páginas */
-    font-weight: bold; /* Texto em negrito */
-    padding: 5px 10px; /* Espaçamento interno */
+    color: #007bff;
+    font-weight: bold;
+    padding: 5px 10px;
     border-radius: 5px;
 }
 
 .custom-paginator .p-paginator-page:hover {
-    background-color: #007bff; /* Cor ao passar o mouse */
+    background-color: #007bff;
     color: white;
 }
 
 .custom-paginator .p-paginator-prev, 
 .custom-paginator .p-paginator-next {
-    color: #007bff; /* Cor das setas de navegação */
+    color: #007bff; 
 }
 
 .custom-paginator .p-paginator-prev:hover,
