@@ -51,6 +51,19 @@ const rotas = [
                 to:"/medicamentos/listar"
             }
         ]
+    },
+    {
+        label:"Pacientes",
+        children:[
+            {
+                label:"Cadastrar Pacientes",
+                to:"/pacientes"
+            },
+            {
+                label:"Pacientes cadastrados",
+                to:"/pacientes/listar"
+            }
+        ]
     }
 
 ]

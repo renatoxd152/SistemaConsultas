@@ -31,12 +31,19 @@ export const usePacienteService = () =>
             return response.data;
         }
 
+        const deletar = async (id:any) : Promise<void> =>
+        {
+            const url:string = `${resourceURL}/${id}`
+            await httpClient.delete(url);
+        }
+
        
 
     return{
         salvar,
         listar,
         pages,
-        getById
+        getById,
+        deletar
     }
 }

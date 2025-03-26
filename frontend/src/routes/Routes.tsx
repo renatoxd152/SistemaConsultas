@@ -5,6 +5,8 @@ import { CadastroMedicamento } from "../components/medicamentos/cadastro"
 import { ListagemMedicamentos } from "../components/medicamentos/listagem"
 import { CadastroMedico } from "../components/medicos/cadastro"
 import { Listagem } from "../components/medicos/listagem"
+import { CadastroPaciente } from "../components/pacientes/cadastro"
+import { ListagemPacientes } from "../components/pacientes/listagem"
 
 const AppRoutes = () =>
 {
@@ -17,6 +19,9 @@ const AppRoutes = () =>
                 <Route path="/consultas/listar" element={<ListagemConsultas/>}/>
                 <Route path="/medicamentos" element={<CadastroMedicamento/>}/>
                 <Route path="/medicamentos/listar" element={<ListagemMedicamentos/>}/>
+                <Route path="/pacientes" element={<CadastroPaciente/>}/>
+                <Route path="/pacientes/listar" element={<ListagemPacientes/>}/>
+
             </Routes>
         </Router>
     )
