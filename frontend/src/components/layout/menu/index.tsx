@@ -17,11 +17,11 @@ const rotas = [
         children:[
             {
                 label:'Cadastrar Médico',
-                to:"/"
+                to:"/medicos/cadastrar"
             },
             {
                 label:'Listar médicos',
-                to:"/listar"
+                to:"/medicos/listar"
             },
         ]
     },
