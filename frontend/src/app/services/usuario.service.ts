@@ -10,8 +10,15 @@ export const useUsuarioService = () =>
         const response: AxiosResponse<Usuario> = await httpClient.post<Usuario>(resourceURL,usuario);
         return response.data;
     }
+    const login = async(usuario:Usuario)=>
+    {
+        const url = `${resourceURL}/login`;
+        const response: AxiosResponse<Usuario> = await httpClient.post<Usuario>(url,usuario);
+        return response.data;
+    }
   
     return{
-        salvar
+        salvar,
+        login
     }
 }

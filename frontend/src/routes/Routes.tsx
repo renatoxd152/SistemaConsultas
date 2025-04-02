@@ -1,32 +1,96 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
-import { ConsultaCadastro } from "../components"
-import { Cadastro } from "../components/cadastro"
-import { ListagemConsultas } from "../components/consultas/listagem"
-import { CadastroMedicamento } from "../components/medicamentos/cadastro"
-import { ListagemMedicamentos } from "../components/medicamentos/listagem"
-import { CadastroMedico } from "../components/medicos/cadastro"
-import { Listagem } from "../components/medicos/listagem"
-import { CadastroPaciente } from "../components/pacientes/cadastro"
-import { ListagemPacientes } from "../components/pacientes/listagem"
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { useAuth } from "../components/provider/RotaAutenticada"
+import ConsultaCadastroPage from "../pages/cadastros/consultas"
+import CadastroMedicamentoPage from "../pages/cadastros/medicamentos"
+import MedicosPage from "../pages/cadastros/medicos"
+import CadastroPacientePage from "../pages/cadastros/pacientes"
+import CadastroUsuarioPage from "../pages/cadastros/usuarios/cadastro"
+import LoginUsuarioPage from "../pages/cadastros/usuarios/login"
+import ListagemConsultasPage from "../pages/consultas/consultas"
+import ListagemMedicamentosPage from "../pages/consultas/medicamentos"
+import MedicosListagemPage from "../pages/consultas/medicos"
+import ListagemPacientesPage from "../pages/consultas/pacientes"
+import { ProtectedRoute } from "./ProtectedRoute"
 const AppRoutes = () =>
 {
-    return(
-        <Router>
-            <Routes>
-                <Route path="/" element={<Cadastro/>}/>
-                <Route path="/medicos/cadastrar" element={<CadastroMedico/>} />
-                <Route path="/medicos/listar" element={<Listagem/>}/>
-                <Route path="/consultas" element={<ConsultaCadastro/>}/>
-                <Route path="/consultas/listar" element={<ListagemConsultas/>}/>
-                <Route path="/medicamentos" element={<CadastroMedicamento/>}/>
-                <Route path="/medicamentos/listar" element={<ListagemMedicamentos/>}/>
-                <Route path="/pacientes" element={<CadastroPaciente/>}/>
-                <Route path="/pacientes/listar" element={<ListagemPacientes/>}/>
+    const{token} = useAuth();
 
-            </Routes>
-        </Router>
-    )
+    
+  const routesForPublic = [
+    {
+      path: "/",
+      element: <LoginUsuarioPage/>,
+    },
+    {
+      path: "/cadastro",
+      element:<CadastroUsuarioPage/>,
+    },
+  ];
+
+  const routesForAuthenticatedOnly = [
+    {
+      path: "/",
+      element: <ProtectedRoute />,
+      children: [
+        {
+          path: "/medicos/cadastrar",
+          element: <MedicosPage/>,
+        },
+        {
+          path: "/medicos/listar",
+          element: <MedicosListagemPage/>,
+        },
+        {
+          path: "/consultas",
+          element: <ConsultaCadastroPage/>,
+        },
+        {
+          path: "/consultas/listar",
+          element: <ListagemConsultasPage/>,
+        },
+        {
+          path: "/medicamentos",
+          element: <CadastroMedicamentoPage/>,
+        },
+        {
+          path: "/medicamentos/listar",
+          element: <ListagemMedicamentosPage/>,
+        },
+        {
+          path: "/pacientes",
+          element: <CadastroPacientePage/>,
+        },
+        {
+          path: "/pacientes/listar",
+          element: <ListagemPacientesPage/>,
+        },
+        {
+          path: "/logout",
+          element: <div>Logout</div>,
+        },
+      ],
+    },
+  ];
+
+
+  const routesForNotAuthenticatedOnly = [
+    {
+        path: "/",
+        element: <LoginUsuarioPage/>,
+      },
+      {
+        path: "/cadastro",
+        element:<CadastroUsuarioPage/>,
+      },
+  ];
+
+  const router = createBrowserRouter([
+    ...routesForPublic,
+    ...(!token ? routesForNotAuthenticatedOnly : []),
+    ...routesForAuthenticatedOnly,
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default AppRoutes

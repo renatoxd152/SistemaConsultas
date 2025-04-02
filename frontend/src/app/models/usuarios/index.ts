@@ -1,9 +1,10 @@
 export interface Usuario
 {
-    id:number;
-    login:string;
-    senha:string;
+    id?:number;
+    login?:string;
+    senha?:string;
     senhaConfirmar?:string;
-    nivel:string;
+    nivel?:string;
     role?:string;
+    token?:string;
 }
