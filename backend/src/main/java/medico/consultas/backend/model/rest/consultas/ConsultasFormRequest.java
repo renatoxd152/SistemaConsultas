@@ -1,17 +1,15 @@
 package medico.consultas.backend.model.rest.consultas;
 
-import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import medico.consultas.backend.model.Consultas;
 import medico.consultas.backend.model.Medico;
 import medico.consultas.backend.model.Paciente;
 
+
 public class ConsultasFormRequest {
 	private Long id; 
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataHora; 
+	private String data; 
+	private String hora;
 	private String motivo;
 	private String tipo;
 	private String status; 
@@ -19,13 +17,14 @@ public class ConsultasFormRequest {
 	private String prescricaoMedica; 
 	private Paciente paciente; 
 	private Medico medico;
-	
-	
-	public ConsultasFormRequest(Long id, LocalDate dataHora, String motivo, String tipo, String status,
-			String observacoes, String prescricaoMedica, Paciente paciente, Medico medico) {
+
+
+	public ConsultasFormRequest(Long id, String data, String hora, String motivo, String tipo, String status,
+			String observacoes, String prescricaoMedica, Paciente  paciente,Medico medico) {
 		super();
 		this.id = id;
-		this.dataHora = dataHora;
+		this.data = data;
+		this.hora = hora;
 		this.motivo = motivo;
 		this.tipo = tipo;
 		this.status = status;
@@ -35,11 +34,11 @@ public class ConsultasFormRequest {
 		this.medico = medico;
 	}
 
-
-	public ConsultasFormRequest(LocalDate dataHora, String motivo, String tipo, String status, String observacoes,
-			String prescricaoMedica, Paciente paciente, Medico medico) {
+	public ConsultasFormRequest(String data, String hora, String motivo, String tipo, String status, String observacoes,
+			String prescricaoMedica, Paciente paciente,Medico medico) {
 		super();
-		this.dataHora = dataHora;
+		this.data = data;
+		this.hora = hora;
 		this.motivo = motivo;
 		this.tipo = tipo;
 		this.status = status;
@@ -48,7 +47,8 @@ public class ConsultasFormRequest {
 		this.paciente = paciente;
 		this.medico = medico;
 	}
-
+	
+	
 
 	public ConsultasFormRequest() {
 		super();
@@ -56,18 +56,29 @@ public class ConsultasFormRequest {
 
 	public Consultas toModel()
 	{
-		return new Consultas(id, dataHora, motivo, tipo, status, observacoes, prescricaoMedica, paciente, medico);
+		return new Consultas(data,hora, motivo, tipo, status, observacoes, prescricaoMedica, paciente, medico);
 	}
 	
 	public static ConsultasFormRequest fromModel(Consultas consulta)
 	{
-		return new ConsultasFormRequest(consulta.getId(), consulta.getDataHora(), consulta.getMotivo(), consulta.getTipo(), consulta.getStatus(), 
-				consulta.getObservacoes(),consulta.getPrescricaoMedica(),consulta.getPaciente(),consulta.getMedico());
+		return new ConsultasFormRequest(consulta.getId(), 
+				consulta.getData(),
+				consulta.getHora() ,
+				consulta.getMotivo(), 
+				consulta.getTipo(), 
+				consulta.getStatus(), 
+				consulta.getObservacoes(),
+				consulta.getPrescricaoMedica(),
+				consulta.getPaciente(),
+				consulta.getMedico());
 	}
-	
+
+
+
 	public Long getId() {
 		return id;
 	}
+
 
 
 	public void setId(Long id) {
@@ -75,14 +86,29 @@ public class ConsultasFormRequest {
 	}
 
 
-	public LocalDate getDataHora() {
-		return dataHora;
+
+	public String getData() {
+		return data;
 	}
 
 
-	public void setDataHora(LocalDate dataHora) {
-		this.dataHora = dataHora;
+
+	public void setData(String data) {
+		this.data = data;
 	}
+
+
+
+	public String getHora() {
+		return hora;
+	}
+
+
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
 
 
 	public String getMotivo() {
@@ -90,9 +116,11 @@ public class ConsultasFormRequest {
 	}
 
 
+
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
+
 
 
 	public String getTipo() {
@@ -100,9 +128,11 @@ public class ConsultasFormRequest {
 	}
 
 
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
 
 
 	public String getStatus() {
@@ -110,9 +140,11 @@ public class ConsultasFormRequest {
 	}
 
 
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 
 
 	public String getObservacoes() {
@@ -120,9 +152,11 @@ public class ConsultasFormRequest {
 	}
 
 
+
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
+
 
 
 	public String getPrescricaoMedica() {
@@ -130,9 +164,11 @@ public class ConsultasFormRequest {
 	}
 
 
+
 	public void setPrescricaoMedica(String prescricaoMedica) {
 		this.prescricaoMedica = prescricaoMedica;
 	}
+
 
 
 	public Paciente getPaciente() {
@@ -140,9 +176,11 @@ public class ConsultasFormRequest {
 	}
 
 
+
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
+
 
 
 	public Medico getMedico() {
@@ -150,11 +188,9 @@ public class ConsultasFormRequest {
 	}
 
 
+
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
-	
-	
-	
 	
 }

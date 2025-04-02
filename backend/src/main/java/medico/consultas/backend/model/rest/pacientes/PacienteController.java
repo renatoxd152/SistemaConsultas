@@ -1,5 +1,8 @@
 package medico.consultas.backend.model.rest.pacientes;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import medico.consultas.backend.model.Paciente;
 import medico.consultas.backend.model.repository.PacienteRepository;
+import medico.consultas.backend.model.rest.medicamentos.MedicamentosFormRequest;
 
 @RestController
 @RequestMapping("/api/pacientes")
@@ -23,7 +27,7 @@ public class PacienteController {
 	private PacienteRepository pacienteRepository;
 	
 	@PostMapping
-	public ResponseEntity salvar(@PathVariable Long id,@RequestBody PacienteFormRequest request)
+	public ResponseEntity salvar(@RequestBody PacienteFormRequest request)
 	{
 		Paciente paciente = request.toModel();
 		pacienteRepository.save(paciente);
@@ -34,6 +38,14 @@ public class PacienteController {
 	public ResponseEntity<PacienteFormRequest> getById(@PathVariable Long id)
 	{
 		return pacienteRepository.findById(id).map(PacienteFormRequest::fromModel).map(pacienteFR->ResponseEntity.ok(pacienteFR)).orElseGet(()->ResponseEntity.notFound().build());
+	}
+	
+	
+	
+	@GetMapping
+	public List<PacienteFormRequest> findAll()
+	{
+		return pacienteRepository.findAll().stream().map(PacienteFormRequest::fromModel).collect(Collectors.toList());
 	}
 	
 	@DeleteMapping("{id}")

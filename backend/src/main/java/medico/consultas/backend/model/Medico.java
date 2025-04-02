@@ -1,6 +1,8 @@
 package medico.consultas.backend.model;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,7 @@ public class Medico {
 	@Column(name="anoConclusao",precision = 4)
 	private int anoConclusao;
 	
+	@JsonIgnore
     @OneToMany(mappedBy = "medico")
     private List<Consultas> consultas;
 	

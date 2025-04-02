@@ -3,6 +3,8 @@ package medico.consultas.backend.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,7 +38,7 @@ public class Paciente {
 		inverseJoinColumns = @JoinColumn(name="medicamento_id")
 			)
 	private List<Medicamento> medicamentosProibidos;
-	
+
 	@ManyToMany
     @JoinTable(
         name = "pacientes_medicos",
@@ -45,6 +47,7 @@ public class Paciente {
     )
     private List<Medico> medicos;
 	
+	@JsonIgnore
     @OneToMany(mappedBy = "paciente")
     private List<Consultas> consultas;
 
@@ -82,6 +85,16 @@ public class Paciente {
 	public Paciente(Long id, String nome, LocalDate dataNascimento, String cpf, String rg) {
 		super();
 		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = dataNascimento;
+		this.cpf = cpf;
+		this.rg = rg;
+	}
+
+
+
+	public Paciente(String nome, LocalDate dataNascimento, String cpf, String rg) {
+		super();
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.cpf = cpf;

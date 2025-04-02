@@ -1,6 +1,7 @@
 package medico.consultas.backend.model;
 
-import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,8 +18,10 @@ public class Consultas {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "dataHora")
-	private LocalDate dataHora;
+	@Column(name = "data")
+	private String data;
+	@Column(name="hora")
+	private String hora;
 	@Column(name = "motivo",length = 300)
 	private String motivo;
 	@Column(name = "tipo")
@@ -29,20 +32,21 @@ public class Consultas {
 	private String observacoes;
 	@Column(name = "prescricaoMedica",length = 1000)
 	private String prescricaoMedica;
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="paciente_id")
 	private Paciente paciente;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="medico_id")
 	private Medico medico;
-	
-	
-	public Consultas(Long id, LocalDate dataHora, String motivo, String tipo, String status, String observacoes,
+
+	public Consultas(Long id, String data, String hora, String motivo, String tipo, String status, String observacoes,
 			String prescricaoMedica, Paciente paciente, Medico medico) {
 		super();
 		this.id = id;
-		this.dataHora = dataHora;
+		this.data = data;
+		this.hora = hora;
 		this.motivo = motivo;
 		this.tipo = tipo;
 		this.status = status;
@@ -51,13 +55,13 @@ public class Consultas {
 		this.paciente = paciente;
 		this.medico = medico;
 	}
-	
-	
-	
-	public Consultas(LocalDate dataHora, String motivo, String tipo, String status, String observacoes,
+
+
+	public Consultas(String data, String hora, String motivo, String tipo, String status, String observacoes,
 			String prescricaoMedica, Paciente paciente, Medico medico) {
 		super();
-		this.dataHora = dataHora;
+		this.data = data;
+		this.hora = hora;
 		this.motivo = motivo;
 		this.tipo = tipo;
 		this.status = status;
@@ -66,6 +70,8 @@ public class Consultas {
 		this.paciente = paciente;
 		this.medico = medico;
 	}
+
+
 
 
 	public Consultas() {
@@ -73,61 +79,147 @@ public class Consultas {
 	}
 
 
+
+
 	public Long getId() {
 		return id;
 	}
+
+
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public LocalDate getDataHora() {
-		return dataHora;
+
+
+
+
+	public String getData() {
+		return data;
 	}
-	public void setDataHora(LocalDate dataHora) {
-		this.dataHora = dataHora;
+
+
+
+
+	public void setData(String data) {
+		this.data = data;
 	}
+
+
+
+
+	public String getHora() {
+		return hora;
+	}
+
+
+
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+
+
+
 	public String getMotivo() {
 		return motivo;
 	}
+
+
+
+
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
+
+
+
+
 	public String getTipo() {
 		return tipo;
 	}
+
+
+
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+
+
+
 	public String getStatus() {
 		return status;
 	}
+
+
+
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+
+
 	public String getObservacoes() {
 		return observacoes;
 	}
+
+
+
+
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
+
+
+
+
 	public String getPrescricaoMedica() {
 		return prescricaoMedica;
 	}
+
+
+
+
 	public void setPrescricaoMedica(String prescricaoMedica) {
 		this.prescricaoMedica = prescricaoMedica;
 	}
+
+
+
+
 	public Paciente getPaciente() {
 		return paciente;
 	}
+
+
+
+
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
+
+
+
+
 	public Medico getMedico() {
 		return medico;
 	}
+
+
+
+
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
-	
+
+
+
 	
 	
 	

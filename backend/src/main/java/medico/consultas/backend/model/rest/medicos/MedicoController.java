@@ -1,5 +1,8 @@
 package medico.consultas.backend.model.rest.medicos;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import medico.consultas.backend.model.Medico;
 import medico.consultas.backend.model.repository.MedicoRepository;
 import medico.consultas.backend.model.rest.medicamentos.MedicamentosFormRequest;
+import medico.consultas.backend.model.rest.pacientes.PacienteFormRequest;
 
 @RestController
 @RequestMapping("/api/medicos")
@@ -36,6 +40,13 @@ public class MedicoController {
 	public ResponseEntity<MedicoFormRequest> getById(@PathVariable Long id)
 	{
 		return medicoRepository.findById(id).map(MedicoFormRequest::fromModel).map(medicoFR->ResponseEntity.ok(medicoFR)).orElseGet(()->ResponseEntity.notFound().build());
+	}
+	
+	
+	@GetMapping
+	public List<MedicoFormRequest> findAll()
+	{
+		return medicoRepository.findAll().stream().map(MedicoFormRequest::fromModel).collect(Collectors.toList());
 	}
 	
 	@DeleteMapping("{id}")

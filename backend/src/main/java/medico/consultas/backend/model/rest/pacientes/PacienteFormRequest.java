@@ -8,8 +8,7 @@ import medico.consultas.backend.model.Paciente;
 
 public class PacienteFormRequest {
 	private Long id; 
-	private String nome; 
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	private String nome;
 	private LocalDate dataNascimento; 
 	private String cpf; 
 	private String rg;
@@ -41,7 +40,7 @@ public class PacienteFormRequest {
 
 	public Paciente toModel()
 	{
-		return new Paciente(id, nome, dataNascimento, cpf, rg);
+		return new Paciente(nome, dataNascimento, cpf, rg);
 	}
 	
 	public static PacienteFormRequest fromModel(Paciente paciente)
