@@ -18,7 +18,7 @@ export const CadastroMedicamento:React.FC = () =>
             setMensagens([{field:"alert alert-success",texto:"Medicamento salvo com sucesso!"}])
         }).catch(error=>
         {
-            console.log(error)
+            console.log("ERRO AO SALVAR MEDICAMENTO:",error)
             setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao salvar o medicamento!"}])
         }
         )

@@ -32,6 +32,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter{
 	    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 	        if (checkIfEndpointIsNotPublic(request)) {
 	            String token = recoveryToken(request);
+	            System.out.print("TOKEN BACKEND :"+ token + "\n");
 	            if (token != null) {
 	                String subject = jwtTokenService.getSubjectFromToken(token);
 	                Usuario user = userRepository.findByLogin(subject).get();
@@ -51,6 +52,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter{
 
 	    private String recoveryToken(HttpServletRequest request) {
 	        String authorizationHeader = request.getHeader("Authorization");
+	        System.out.print("AUTORIZAÇÃO BACKEND TOKEN :"+ authorizationHeader + "\n");
 	        if (authorizationHeader != null) {
 	            return authorizationHeader.replace("Bearer ", "");
 	        }

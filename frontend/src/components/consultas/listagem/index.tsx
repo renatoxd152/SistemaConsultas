@@ -13,10 +13,10 @@ export const ListagemConsultas: React.FC = () =>
     const[mensagens,setMensagens] = useState<Array<Alert>>([])
     const{data:result} = useSWR<AxiosResponse<Consulta[]>>("/api/consultas",(url:string)=>httpClient.get(url))
     const service = useConsultaService();
+    
     useEffect(()=>{
         setConsultas(result?.data || [])
     },[result])
-    console.log(result)
 
     const deletar = (consulta:Consulta)=>
     {

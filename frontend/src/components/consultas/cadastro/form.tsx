@@ -88,7 +88,8 @@ export const ConsultasForm:React.FC<ConsultasFormProps> = ({
     }
     const formik = useFormik({
         initialValues:{...formScheme},
-        onSubmit
+        onSubmit,
+        validateOnChange: false
     });
 
     return(

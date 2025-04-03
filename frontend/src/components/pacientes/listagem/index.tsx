@@ -17,17 +17,20 @@ export const ListagemPacientes:React.FC= () =>
     useEffect(()=>{
         setPacientes(result?.data || [])
     },[result])
-    console.log(result)
+    
 
     const deletar = (paciente:Paciente)=>
     {
+        console.log(paciente.id)
         service.deletar(paciente.id).then(response=>
         {
+          
             setPacientes(prevPacientes => prevPacientes?.filter(p => p.id !== paciente.id) || []);
             setMensagens([{field:"alert alert-success",texto:"Paciente deletado com sucesso!"}])
         })
         .catch(error=>
         {
+            console.log("erro pacientes",error)
             setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao deletar a consulta!"}])
         })
     }

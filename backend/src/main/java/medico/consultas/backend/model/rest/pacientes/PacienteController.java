@@ -49,7 +49,6 @@ public class PacienteController {
 	}
 	
 	@DeleteMapping("{id}")
-	
 	public ResponseEntity<Object> delete(@PathVariable Long id)
 	{
 		return pacienteRepository.findById(id).map(paciente->
