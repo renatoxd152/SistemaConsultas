@@ -17,7 +17,7 @@ export const ConsultaCadastro:React.FC = () =>
     const servicePaciente = usePacienteService()
     const handleSubmit = async (consultaForm:ConsultaCadastroForm) =>
     {
-        console.log(consultaForm)
+        console.log("FORMULÁRIO DE CONSULTA",consultaForm)
         const medico:Medico = await serviceMedico.getById(consultaForm.medico_id);
         const paciente:Paciente = await servicePaciente.getById(consultaForm.paciente_id);
         

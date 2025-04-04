@@ -64,6 +64,15 @@ const rotas = [
                 to:"/pacientes/listar"
             }
         ]
+    },
+    {
+        label:"Relatórios",
+        children:[
+            {
+                label:"Consultas Médicas",
+                to:"/relatorios/"
+            }
+        ]
     }
 
 ]

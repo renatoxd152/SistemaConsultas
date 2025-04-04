@@ -31,6 +31,7 @@ public class Paciente {
 	@Column(name="rg",length = 30)
 	private String rg;
 	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 		name = "pacientes_medicamentos_proibidos",
@@ -38,7 +39,7 @@ public class Paciente {
 		inverseJoinColumns = @JoinColumn(name="medicamento_id")
 			)
 	private List<Medicamento> medicamentosProibidos;
-
+	@JsonIgnore
 	@ManyToMany
     @JoinTable(
         name = "pacientes_medicos",

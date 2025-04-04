@@ -21,9 +21,18 @@ export const useConsultaService = () =>
         await httpClient.delete(url);
     }
 
+    const gerarRelatorioVendas = async(dataInicial:string,dataFinal:string):Promise<Blob>=>
+    {
+        const url = `${resourceURL}/relatorio-consultas?inicio=${dataInicial}&fim=${dataFinal}`;
+        const response:AxiosResponse= await httpClient.get(url,{responseType:'blob'})  
+        const bytes = response.data;
+        return new Blob([bytes],{type:'application/pdf'})
+    }
+
     return{
         salvar,
         listar,
-        deletar
+        deletar,
+        gerarRelatorioVendas
     }
 }

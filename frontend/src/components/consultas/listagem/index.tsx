@@ -17,7 +17,7 @@ export const ListagemConsultas: React.FC = () =>
     useEffect(()=>{
         setConsultas(result?.data || [])
     },[result])
-
+    console.log("resultado",result)
     const deletar = (consulta:Consulta)=>
     {
         service.deletar(consulta.id).then(response=>

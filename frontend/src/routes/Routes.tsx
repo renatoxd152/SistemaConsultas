@@ -10,6 +10,7 @@ import ListagemConsultasPage from "../pages/consultas/consultas"
 import ListagemMedicamentosPage from "../pages/consultas/medicamentos"
 import MedicosListagemPage from "../pages/consultas/medicos"
 import ListagemPacientesPage from "../pages/consultas/pacientes"
+import RelatorioConsultasPage from "../pages/consultas/relatorios"
 import { ProtectedRoute } from "./ProtectedRoute"
 const AppRoutes = () =>
 {
@@ -63,6 +64,10 @@ const AppRoutes = () =>
         {
           path: "/pacientes/listar",
           element: <ListagemPacientesPage/>,
+        },
+        {
+          path: "/relatorios",
+          element: <RelatorioConsultasPage/>,
         },
         {
           path: "/logout",
