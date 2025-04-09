@@ -41,6 +41,8 @@ public class Medico {
 	private String subespecialidade;
 	@Column(name="anoConclusao",precision = 4)
 	private int anoConclusao;
+	@Column(name="endereco")
+	private String endereco;
 	
 	@JsonIgnore
     @OneToMany(mappedBy = "medico")
@@ -49,7 +51,7 @@ public class Medico {
 	
 	
 	public Medico(Long id, String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
-			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
+			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,String endereco,
 			int anoConclusao, List<Consultas> consultas) {
 		super();
 		this.id = id;
@@ -66,11 +68,12 @@ public class Medico {
 		this.subespecialidade = subespecialidade;
 		this.anoConclusao = anoConclusao;
 		this.consultas = consultas;
+		this.endereco = endereco;
 	}
 	
 	
 	public Medico(String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
-			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
+			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,String endereco,
 			int anoConclusao, List<Consultas> consultas) {
 		super();
 		this.nome = nome;
@@ -86,6 +89,7 @@ public class Medico {
 		this.subespecialidade = subespecialidade;
 		this.anoConclusao = anoConclusao;
 		this.consultas = consultas;
+		this.endereco = endereco; 
 	}
 
 
@@ -93,7 +97,7 @@ public class Medico {
 
 
 	public Medico(String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
-			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
+			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,String endereco,
 			int anoConclusao) {
 		super();
 		this.nome = nome;
@@ -108,6 +112,7 @@ public class Medico {
 		this.especialidade = especialidade;
 		this.subespecialidade = subespecialidade;
 		this.anoConclusao = anoConclusao;
+		this.endereco = endereco;
 	}
 
 	
@@ -115,7 +120,7 @@ public class Medico {
 
 	public Medico(Long id, String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
 			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
-			int anoConclusao) {
+			int anoConclusao,String endereco) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -130,6 +135,7 @@ public class Medico {
 		this.especialidade = especialidade;
 		this.subespecialidade = subespecialidade;
 		this.anoConclusao = anoConclusao;
+		this.endereco = endereco;
 	}
 
 
@@ -250,6 +256,18 @@ public class Medico {
 	public void setConsultas(List<Consultas> consultas) {
 		this.consultas = consultas;
 	}
+
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	
+	
 	
 	
 	

@@ -38,6 +38,10 @@ const AppRoutes = () =>
           element: <MedicosPage/>,
         },
         {
+          path: "/medicos/cadastrar/:id",
+          element: <MedicosPage/>,
+        },
+        {
           path: "/medicos/listar",
           element: <MedicosListagemPage/>,
         },
@@ -59,6 +63,10 @@ const AppRoutes = () =>
         },
         {
           path: "/pacientes",
+          element: <CadastroPacientePage/>,
+        },
+        {
+          path: "/pacientes/editar/:id",
           element: <CadastroPacientePage/>,
         },
         {

@@ -18,12 +18,13 @@ public class MedicoFormRequest {
 	private String estadoCRM;
 	private String especialidade;
 	private String subespecialidade;
+	private String endereco;
 	private int anoConclusao;
     private List<Consultas> consultas;
     
     
 	public MedicoFormRequest(Long id, String nome, String dataNascimento, String genero, String cpf, String rg,
-			String telefone, String email, String numeroCRM, String estadoCRM, String especialidade,
+			String telefone, String email, String numeroCRM, String estadoCRM, String especialidade,String endereco,
 			String subespecialidade, int anoConclusao, List<Consultas> consultas) {
 		super();
 		this.id = id;
@@ -40,6 +41,7 @@ public class MedicoFormRequest {
 		this.subespecialidade = subespecialidade;
 		this.anoConclusao = anoConclusao;
 		this.consultas = consultas;
+		this.endereco = endereco;
 	}
 	
 	
@@ -47,7 +49,7 @@ public class MedicoFormRequest {
 	
 	
 	public MedicoFormRequest(String nome, String dataNascimento, String genero, String cpf, String rg, String telefone,
-			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,
+			String email, String numeroCRM, String estadoCRM, String especialidade, String subespecialidade,String endereco,
 			int anoConclusao) {
 		super();
 		this.nome = nome;
@@ -62,6 +64,7 @@ public class MedicoFormRequest {
 		this.especialidade = especialidade;
 		this.subespecialidade = subespecialidade;
 		this.anoConclusao = anoConclusao;
+		this.endereco = endereco;
 	}
 
 
@@ -70,7 +73,7 @@ public class MedicoFormRequest {
 
 	public MedicoFormRequest(Long id, String nome, String dataNascimento, String genero, String cpf, String rg,
 			String telefone, String email, String numeroCRM, String estadoCRM, String especialidade,
-			String subespecialidade, int anoConclusao) {
+			String subespecialidade, int anoConclusao,String endereco) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -85,6 +88,7 @@ public class MedicoFormRequest {
 		this.especialidade = especialidade;
 		this.subespecialidade = subespecialidade;
 		this.anoConclusao = anoConclusao;
+		this.endereco = endereco;
 	}
 
 	public MedicoFormRequest() {
@@ -95,12 +99,12 @@ public class MedicoFormRequest {
 	{
 		return new MedicoFormRequest(medico.getId(),medico.getNome(),medico.getDataNascimento(),medico.getGenero(),medico.getCpf(),medico.getRg(),
 				medico.getTelefone(),medico.getEmail(),medico.getNumeroCRM(),medico.getEstadoCRM(),medico.getEspecialidade(),
-				medico.getSubespecialidade(),medico.getAnoConclusao());
+				medico.getSubespecialidade(),medico.getAnoConclusao(),medico.getEndereco());
 	}
 	
 	public Medico toModel()
 	{
-		return new Medico(nome,dataNascimento,genero,rg,cpf,telefone,email,numeroCRM,estadoCRM,especialidade,subespecialidade,anoConclusao);
+		return new Medico(nome,dataNascimento,genero,rg,cpf,telefone,email,numeroCRM,estadoCRM,especialidade,subespecialidade,endereco,anoConclusao);
 	}
 
 	public Long getId() {
@@ -187,6 +191,18 @@ public class MedicoFormRequest {
 	public void setConsultas(List<Consultas> consultas) {
 		this.consultas = consultas;
 	}
+	
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+
 
 
 
@@ -195,9 +211,12 @@ public class MedicoFormRequest {
 		return "MedicoFormRequest [id=" + id + ", nome=" + nome + ", dataNascimento=" + dataNascimento + ", genero="
 				+ genero + ", cpf=" + cpf + ", rg=" + rg + ", telefone=" + telefone + ", email=" + email
 				+ ", numeroCRM=" + numeroCRM + ", estadoCRM=" + estadoCRM + ", especialidade=" + especialidade
-				+ ", subespecialidade=" + subespecialidade + ", anoConclusao=" + anoConclusao + ", consultas="
-				+ consultas + "]";
+				+ ", subespecialidade=" + subespecialidade + ", endereco=" + endereco + ", anoConclusao=" + anoConclusao
+				+ ", consultas=" + consultas + "]";
 	}
+
+
+
 	
     
     

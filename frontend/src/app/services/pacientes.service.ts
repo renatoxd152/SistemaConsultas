@@ -36,6 +36,11 @@ export const usePacienteService = () =>
             const url:string = `${resourceURL}/${id}`
             await httpClient.delete(url);
         }
+         const atualizar = async (paciente:Paciente) : Promise<void> =>
+        {
+            const url:string = `${resourceURL}/${paciente.id}`;
+            await httpClient.put<Paciente>(url,paciente);
+        }
 
        
 
@@ -44,6 +49,7 @@ export const usePacienteService = () =>
         listar,
         pages,
         getById,
-        deletar
+        deletar,
+        atualizar
     }
 }

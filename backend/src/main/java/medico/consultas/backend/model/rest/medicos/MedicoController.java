@@ -1,6 +1,7 @@
 package medico.consultas.backend.model.rest.medicos;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import medico.consultas.backend.model.Medico;
 import medico.consultas.backend.model.repository.MedicoRepository;
-import medico.consultas.backend.model.rest.medicamentos.MedicamentosFormRequest;
-import medico.consultas.backend.model.rest.pacientes.PacienteFormRequest;
+
 
 @RestController
 @RequestMapping("/api/medicos")
@@ -64,6 +65,20 @@ public class MedicoController {
 	public Page<MedicoFormRequest> getLista(Pageable pageable)
 	{
 		return medicoRepository.findAll(pageable).map(MedicoFormRequest::fromModel);
+	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody MedicoFormRequest request)
+	{
+		Optional<Medico> medicoExistente = medicoRepository.findById(id);
+		if(medicoExistente.isEmpty())
+		{
+			return ResponseEntity.notFound().build();
+		}
+		Medico medico = request.toModel();
+		medico.setId(id);
+		medicoRepository.save(medico);
+		return ResponseEntity.noContent().build();
 	}
 
 }

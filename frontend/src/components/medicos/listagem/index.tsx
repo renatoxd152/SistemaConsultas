@@ -1,14 +1,19 @@
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "primereact/button";
 import { Column } from "primereact/column";
+import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { DataTable, DataTableStateEvent } from "primereact/datatable";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Page } from "../../../app/models/common/page";
 import { Medico } from "../../../app/models/medicos";
 import { useMedicoService } from "../../../app/services/medicos.service";
+import { Alert } from "../../common/mensagem";
 import { Layout } from "../../layout";
-
 export const Listagem: React.FC = () => {
   const service = useMedicoService();
-
+  const[mensagens,setMensagens] = useState<Array<Alert>>([])
   const [medicos, setMedicos] = useState<Page<Medico>>({
     content: [],
     first: 0,
@@ -37,18 +42,66 @@ export const Listagem: React.FC = () => {
       .catch((error) => console.error("Erro ao buscar dados:", error));
   }, []);
 
+  const deletar = (medico:Medico)=>
+    {
+        service.deletar(medico.id).then(result=>
+        {
+            handlePage(null)
+        })
+        .catch(error=>
+        {
+          setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao deletar o médico"}])
+        }
+        )
+    }
+  const navigate = useNavigate()
+
+  const confirmarDelecao = (event: React.MouseEvent, medico: Medico) => {
+    confirmPopup({
+      target: event.currentTarget as HTMLElement,
+      message: `Tem certeza que deseja excluir o médico "${medico.nome}"?`,
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      acceptClassName: 'p-button-danger',
+      accept: () => deletar(medico),
+    });
+  };
+  
+  const actionTemplate = (medico:Medico)=>
+    {
+        const url = `/medicos/cadastrar/${medico.id}`
+        return(
+            <div>
+                <Button label="Editar"
+                className="btn btn-primary btn-sm"
+                onClick={()=>navigate(url)}
+                > <FontAwesomeIcon icon={faEdit} className="me-2" /></Button>
+                
+                <Button 
+                label="Deletar"  
+                className="btn btn-danger btn-sm" 
+                onClick={(e) => confirmarDelecao(e, medico)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </Button>
+            </div>
+        )
+    }
+
   return (
     <Layout
       titulo="Listagem de Médicos"
       tittleClassName="h1 display-6 fw-bold text-primary mt-4"
       className="text-center"
+      mensagens={mensagens}
     >
       <div className="container mt-4">
         <div className="card shadow rounded-3">
           <div className="card-header bg-primary text-white text-center fw-bold">
             Listagem de Médicos
           </div>
-          
+          <ConfirmPopup />
             <DataTable
               value={medicos.content}
               totalRecords={medicos.totalElements}
@@ -70,6 +123,7 @@ export const Listagem: React.FC = () => {
               <Column field="email" header="Email" />
               <Column field="numeroCRM" header="Número CRM" />
               <Column field="especialidade" header="Especialidade" />
+              <Column header="" body={actionTemplate}/>
             </DataTable>
           
         </div>

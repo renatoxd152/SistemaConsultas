@@ -26,13 +26,13 @@ export const ConsultasForm:React.FC<ConsultasFormProps> = ({
             const pacientesData = await servicePaciente.listar();
             const medicosFormatados = medicosData.map(medico => ({
                 value: medico.id ? String(medico.id) : '',
-                label: medico.nome
+                label: medico.nome ?? ""
             }));
     
            
             const pacientesFormatados = pacientesData.map(paciente => ({
                 value: paciente.id ? String(paciente.id) : '',
-                label: paciente.nome
+                label: paciente.nome ? String(paciente.nome) :''
             }));
         
             

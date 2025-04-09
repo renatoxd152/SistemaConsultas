@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  type: string;
+  type?: string;
   TextLabel?: string;
   error?: string;
   className?: string;

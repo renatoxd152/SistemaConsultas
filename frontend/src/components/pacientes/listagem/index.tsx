@@ -34,6 +34,7 @@ export const ListagemPacientes:React.FC= () =>
             setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao deletar a consulta!"}])
         })
     }
+
     
     return(
         <Layout titulo="Listagem de Pacientes" tittleClassName="h1 display-6 fw-bold text-primary mt-4" className="text-center" mensagens={mensagens}>

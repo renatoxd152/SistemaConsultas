@@ -1,7 +1,8 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format } from 'date-fns';
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Paciente } from '../../../../app/models/pacientes';
 interface TabelaPacienteProps {
     pacientes: Array<Paciente>;
@@ -30,7 +31,7 @@ export const TabelaPacientes: React.FC<TabelaPacienteProps> = ({ pacientes, onDe
                         <tbody>
                             {pacientes.length > 0 ? (
                                 pacientes.map((paciente) => (
-                                    <PacienteRow key={paciente.id} paciente={paciente} onDelete={onDelete} />
+                                    <PacienteRow key={paciente.id} paciente={paciente} onDelete={onDelete}/>
                                 ))
                             ) : (
                                 <tr>
@@ -51,17 +52,24 @@ interface PacienteRowProps {
 }
 
 const PacienteRow: React.FC<PacienteRowProps> = ({ paciente, onDelete }) => {
+    const navigate = useNavigate()
+    const url = `/pacientes/editar/${paciente.id}`
     return (
         <tr>
             <td>{paciente.id}</td>
             <td>{paciente.nome}</td>
             <td>{paciente.rg}</td>
             <td>{paciente.cpf}</td>
-            <td>{format(new Date(paciente.dataNascimento), "dd/MM/yyyy")}</td>
+            <td>
+                {paciente.dataNascimento
+                    ? format(new Date(paciente.dataNascimento), "dd/MM/yyyy")
+                    : "Data não informada"}
+                </td>
             <td>
                 <button onClick={() => onDelete(paciente)} className="btn btn-danger btn-sm">
                      <FontAwesomeIcon icon={faTrash} /> Deletar
                 </button>
+                <button onClick={()=>navigate(url)} className="btn btn-primary btn-sm">Editar <FontAwesomeIcon icon={faEdit} /></button>
             </td>
         </tr>
     );

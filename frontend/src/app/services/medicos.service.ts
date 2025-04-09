@@ -30,10 +30,24 @@ export const useMedicoService = () =>
             return response.data;
         }
 
+    const deletar = async (id:any) : Promise<void> =>
+        {
+            const url:string = `${resourceURL}/${id}`
+            await httpClient.delete(url);
+        }
+    const atualizar = async (medico:Medico) : Promise<void> =>
+    {
+        const url:string = `${resourceURL}/${medico.id}`;
+        await httpClient.put<Medico>(url,medico);
+    }
+        
+
     return{
         salvar,
         listar,
         pages,
-        getById
+        getById,
+        deletar,
+        atualizar
     }
 }
