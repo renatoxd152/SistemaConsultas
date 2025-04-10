@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
+import { Button } from "primereact/button";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Paciente } from "../../../app/models/pacientes";
 import { Input } from "../../common/input";
 import { validationScheme } from "./validationSchema";
@@ -27,6 +29,7 @@ export const PacienteForm:React.FC<PacienteProps> = ({
             enableReinitialize:true
         }
     )
+    const navigate = useNavigate()
     return(
         <form onSubmit={formik.handleSubmit}  className="order p-4 rounded shadow bg-white">
            {formik.values.id !== 0 && (
@@ -51,6 +54,14 @@ export const PacienteForm:React.FC<PacienteProps> = ({
             </div>
             <div className="p-4">
                 <button type="submit" className="btn btn-primary p-2">{formik.values.id ? "Atualizar Paciente": "Cadastrar Paciente"}</button>
+            </div>
+            <div className="d-flex justify-content-start mt-4">
+                <Button
+                    label="Voltar para a listagem" 
+                    className="btn btn-secondary" 
+                    icon="pi pi-arrow-left" 
+                    onClick={() => navigate("/pacientes/listar")} 
+                />
             </div>
         </form>
     )

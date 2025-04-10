@@ -1,7 +1,9 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useFormik } from "formik";
+import { Button } from "primereact/button";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Medicamento } from "../../../app/models/medicamentos";
 import { Input } from "../../common/input";
 import { validationScheme } from "../validationScheme";
@@ -24,7 +26,7 @@ export const CadastroMedicamentoForm: React.FC<CadastroFormProps> = ({ onSubmit,
         validateOnChange: false,
         enableReinitialize:true
     });
-
+    const navigate = useNavigate()
     return (
         <div className="container d-flex justify-content-center">
           
@@ -53,6 +55,14 @@ export const CadastroMedicamentoForm: React.FC<CadastroFormProps> = ({ onSubmit,
                         placeholder="Digite o nome do medicamento"
                     />
                     <button type="submit" className="btn btn-primary w-100 py-2">{formik.values.id? "Atualizar":"Cadastrar"}</button>
+                    <div className="d-flex justify-content-start mt-4">
+                <Button
+                    label="Voltar para a listagem" 
+                    className="btn btn-secondary" 
+                    icon="pi pi-arrow-left" 
+                    onClick={() => navigate("/medicamentos/listar")} 
+                />
+            </div>
                 </form>
 
         </div>

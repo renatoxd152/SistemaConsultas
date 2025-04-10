@@ -58,10 +58,20 @@ const actionTemplate = (medicamento:Medicamento)=>
 
   return (
       <div className="container mt-4">
+        <div className="d-flex justify-content-end my-3">
+        <Button
+          label="Adicionar novo medicamento"
+          className="btn btn-success"
+          icon="pi pi-plus"
+          onClick={() => navigate("/medicamentos")}
+        />
+      </div>
         <div className="card shadow rounded-3">
+          
           <div className="card-header bg-primary text-white text-center fw-bold">
             Listagem de Medicamentos
           </div>
+          
          <ConfirmPopup />
             <DataTable
               value={medicamentos.content}

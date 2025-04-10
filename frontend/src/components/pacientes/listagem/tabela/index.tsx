@@ -52,7 +52,14 @@ export const TabelaPacientes: React.FC<TabelaPacientesProps> = ({
   return (
     
     <div className="table-responsive">
-        
+        <div className="d-flex justify-content-end my-3">
+        <Button
+          label="Adicionar novo paciente"
+          className="btn btn-success"
+          icon="pi pi-plus"
+          onClick={() => navigate("/pacientes")}
+        />
+      </div>
            <ConfirmPopup />
             <DataTable
             value={pacientes.content}

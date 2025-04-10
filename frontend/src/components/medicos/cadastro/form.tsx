@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
+import { Button } from "primereact/button";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Medico } from "../../../app/models/medicos";
 import { Input } from "../../common/input";
 import { Select } from "../../common/select";
@@ -33,6 +35,7 @@ const formScheme:Medico = {
     subespecialidade:"",
     anoConclusao:0,
 }
+
 export const MedicoForm:React.FC<MedicoFormProps> = ({
     onSubmit,medico
 }) =>
@@ -46,6 +49,7 @@ export const MedicoForm:React.FC<MedicoFormProps> = ({
 
     })
 
+    const navigate = useNavigate()
    
     return(
         <div className="container mt-5">
@@ -101,7 +105,17 @@ export const MedicoForm:React.FC<MedicoFormProps> = ({
                     {
                     formik.values.id ? "Atualizar médico" : "Cadastrar médico" }</button>
             </div>
+
+            <div className="d-flex justify-content-start mt-4">
+                <Button
+                    label="Voltar para a listagem" 
+                    className="btn btn-secondary" 
+                    icon="pi pi-arrow-left" 
+                    onClick={() => navigate("/medicos/listar")} 
+                />
+            </div>
         </form>
+       
         </div>
     )
 }

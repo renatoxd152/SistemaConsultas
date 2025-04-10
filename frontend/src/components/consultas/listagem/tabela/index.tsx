@@ -5,6 +5,7 @@ import { Column } from "primereact/column";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { DataTable, DataTableStateEvent } from "primereact/datatable";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Page } from "../../../../app/models/common/page";
 import { Consulta } from "../../../../app/models/consultas";
 interface TabelaConsultasProps {
@@ -42,9 +43,18 @@ export const TabelaConsultas: React.FC<TabelaConsultasProps> = ({
             </div>
         )
     }
+    const navigate = useNavigate()
   return (
     <div className="table-responsive">
            <ConfirmPopup />
+           <div className="d-flex justify-content-end my-3">
+        <Button
+          label="Adicionar nova consulta"
+          className="btn btn-success"
+          icon="pi pi-plus"
+          onClick={() => navigate("/consultas")}
+        />
+      </div>
             <DataTable
             value={consultas.content}
             totalRecords={consultas.totalElements}

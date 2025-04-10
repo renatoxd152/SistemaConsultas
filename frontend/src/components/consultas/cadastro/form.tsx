@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
+import { Button } from "primereact/button";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ConsultaCadastroForm } from "../../../app/models/consultaForm";
 import { useMedicoService } from "../../../app/services/medicos.service";
 import { usePacienteService } from "../../../app/services/pacientes.service";
@@ -101,7 +103,7 @@ export const ConsultasForm:React.FC<ConsultasFormProps> = ({
         validationSchema:validationScheme,
         validateOnChange: false
     });
-
+    const navigate = useNavigate()
     return(
         <form onSubmit={formik.handleSubmit} className="order p-4 rounded shadow bg-white">
             <div className="row">
@@ -120,8 +122,19 @@ export const ConsultasForm:React.FC<ConsultasFormProps> = ({
                 <Input id="observacoes" name="observacoes" type="text" onChange={formik.handleChange}  TextLabel="Observações:" errorClassName="text-danger small mt-1" error={formik.errors.observacoes} className="col p-3" inputClassName="form-control" value={formik.values.observacoes}/>
                 <Input id="prescricaoMedica" name="prescricaoMedica" type="text" onChange={formik.handleChange} TextLabel="Prescrição médica:" errorClassName="text-danger small mt-1" error={formik.errors.prescricaoMedica} className="col p-3" inputClassName="form-control" value={formik.values.prescricaoMedica} />
             </div>
-                <button type="submit" className="btn btn-primary p-2">Cadastrar consulta</button>
-        
+            <div className="d-flex justify-content-center mt-4">
+                <button type="submit" className="btn btn-primary p-2">
+                    Cadastrar consulta
+                </button>
+            </div>
+            <div className="d-flex justify-content-start mt-4">
+                <Button
+                    label="Voltar para a listagem" 
+                    className="btn btn-secondary" 
+                    icon="pi pi-arrow-left" 
+                    onClick={() => navigate("/medicos/listar")} 
+                />
+            </div>
         </form>
     )
 }

@@ -96,6 +96,15 @@ export const Listagem: React.FC = () => {
       className="text-center"
       mensagens={mensagens}
     >
+      
+      <div className="d-flex justify-content-end my-3">
+        <Button
+          label="Adicionar novo médico"
+          className="btn btn-success"
+          icon="pi pi-plus"
+          onClick={() => navigate("/medicos/cadastrar")}
+        />
+      </div>
       <div className="container mt-4">
         <div className="card shadow rounded-3">
           <div className="card-header bg-primary text-white text-center fw-bold">
