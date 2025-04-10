@@ -1,76 +1,88 @@
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { format } from 'date-fns';
+import { Button } from "primereact/button";
+import { Column } from "primereact/column";
+import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
+import { DataTable, DataTableStateEvent } from "primereact/datatable";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Paciente } from '../../../../app/models/pacientes';
-interface TabelaPacienteProps {
-    pacientes: Array<Paciente>;
-    onDelete: (paciente: Paciente) => void;
+import { Page } from "../../../../app/models/common/page";
+import { Paciente } from "../../../../app/models/pacientes";
+interface TabelaPacientesProps {
+  pacientes:Page<Paciente>;
+  onDelete: (paciente:Paciente) => void;
+  handlePage: (event: DataTableStateEvent) => void; 
 }
-
-export const TabelaPacientes: React.FC<TabelaPacienteProps> = ({ pacientes, onDelete }) => {
-    return (
-        <div className="container mt-4">
-            <div className="card shadow rounded-3">
-                <div className="card-header bg-primary text-white text-center fw-bold">
-                    Listagem de Pacientes
-                </div>
-                <div className="card-body p-3">
-                    <table className="table table-bordered text-center">
-                        <thead className="table-primary">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>RG</th>
-                                <th>CPF</th>
-                                <th>Data de Nascimento</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pacientes.length > 0 ? (
-                                pacientes.map((paciente) => (
-                                    <PacienteRow key={paciente.id} paciente={paciente} onDelete={onDelete}/>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td colSpan={6} className="text-muted">Nenhum paciente encontrado.</td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+export const TabelaPacientes: React.FC<TabelaPacientesProps> = ({
+  pacientes,
+  onDelete,
+  handlePage
+}) => {
+   const navigate = useNavigate() 
+  const confirmarDelecao = (event: React.MouseEvent, paciente:Paciente) => {
+    confirmPopup({
+      target: event.currentTarget as HTMLElement,
+      message: "Tem certeza que deseja excluir o paciente?",
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Não',
+      acceptClassName: 'p-button-danger', 
+      accept: () => onDelete(paciente),
+    });
+  };
+  const actionTemplate = (paciente:Paciente)=>
+    {
+        
+        const url = `/pacientes/editar/${paciente.id}`
+        return(
+            <div>
+                <Button 
+                label="Deletar "  
+                className="btn btn-danger btn-sm" 
+                onClick={(e) => confirmarDelecao(e, paciente)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </Button>
+              <Button label="Editar " className="btn btn-primary btn-sm" onClick={() => navigate(url)}>
+              <FontAwesomeIcon icon={faEdit} />
+              </Button>
             </div>
-        </div>
-    );
-};
-
-interface PacienteRowProps {
-    paciente: Paciente;
-    onDelete: (paciente: Paciente) => void;
-}
-
-const PacienteRow: React.FC<PacienteRowProps> = ({ paciente, onDelete }) => {
-    const navigate = useNavigate()
-    const url = `/pacientes/editar/${paciente.id}`
-    return (
-        <tr>
-            <td>{paciente.id}</td>
-            <td>{paciente.nome}</td>
-            <td>{paciente.rg}</td>
-            <td>{paciente.cpf}</td>
-            <td>
-                {paciente.dataNascimento
-                    ? format(new Date(paciente.dataNascimento), "dd/MM/yyyy")
-                    : "Data não informada"}
-                </td>
-            <td>
-                <button onClick={() => onDelete(paciente)} className="btn btn-danger btn-sm">
-                     <FontAwesomeIcon icon={faTrash} /> Deletar
-                </button>
-                <button onClick={()=>navigate(url)} className="btn btn-primary btn-sm">Editar <FontAwesomeIcon icon={faEdit} /></button>
-            </td>
-        </tr>
-    );
+        )
+    }
+  return (
+    
+    <div className="table-responsive">
+        
+           <ConfirmPopup />
+            <DataTable
+            value={pacientes.content}
+            totalRecords={pacientes.totalElements}
+            lazy
+            paginator
+            first={pacientes.first}
+            rows={pacientes.size}
+            onPage={handlePage}
+            emptyMessage="Nenhum registro encontrado"
+            className="table"
+            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+            rowsPerPageOptions={[5, 10, 20]}
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+            paginatorClassName="custom-paginator"
+          >
+            <Column field="id" header="ID" />
+            <Column field="nome" header="Nome"  />
+            <Column field="rg" header="RG"/>
+            <Column field="cpf" header="CPF" />
+            <Column
+              header="Data Nascimento"
+              body={(rowData) => {
+                const data = new Date(rowData.dataNascimento);
+                return data.toLocaleDateString("pt-BR");
+              }}/>
+           
+            <Column header="" body={actionTemplate}/>
+    
+          </DataTable>
+    </div>
+  );
 };

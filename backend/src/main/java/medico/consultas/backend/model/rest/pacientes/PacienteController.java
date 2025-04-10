@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import medico.consultas.backend.model.Medico;
 import medico.consultas.backend.model.Paciente;
 import medico.consultas.backend.model.repository.PacienteRepository;
+import medico.consultas.backend.model.rest.consultas.ConsultasFormRequest;
 import medico.consultas.backend.model.rest.medicamentos.MedicamentosFormRequest;
 import medico.consultas.backend.model.rest.medicos.MedicoFormRequest;
 
@@ -50,6 +53,11 @@ public class PacienteController {
 	public List<PacienteFormRequest> findAll()
 	{
 		return pacienteRepository.findAll().stream().map(PacienteFormRequest::fromModel).collect(Collectors.toList());
+	}
+	@GetMapping("/listar/paginas")
+	public Page<PacienteFormRequest> getLista(Pageable pageable)
+	{
+		return pacienteRepository.findAll(pageable).map(PacienteFormRequest::fromModel);
 	}
 	
 	@DeleteMapping("{id}")

@@ -46,7 +46,7 @@ export const PacienteForm:React.FC<PacienteProps> = ({
                 <Input id="dataNascimento" name="dataNascimento" type="date" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.dataNascimento} error={formik.errors.dataNascimento} TextLabel="Data de Nascimento" className="col" inputClassName="form-control"/>
             </div>
             <div className="p-4">
-                <button type="submit" className="btn btn-primary p-2">{formik.values.id ? "Atualizar Paciente":"Cadastrar Paciente"}</button>
+                <button type="submit" className="btn btn-primary p-2">{formik.values.id ? "Atualizar Paciente": "Cadastrar Paciente"}</button>
             </div>
         </form>
     )
