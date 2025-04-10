@@ -18,6 +18,7 @@ const opcoes:Opcao[] = [
     {value:"2",label:"Feminino"},
 ]
 const formScheme:Medico = {
+    id:0,
     nome:"",
     dataNascimento:"",
     genero:"1",
@@ -44,17 +45,26 @@ export const MedicoForm:React.FC<MedicoFormProps> = ({
         enableReinitialize:true
 
     })
-console.log(formik)
+
+   
     return(
         <div className="container mt-5">
         <form onSubmit={formik.handleSubmit} className="order p-4 rounded shadow bg-white">
-            <div className="row">
-                <Input id="id" name="id" 
+            {
+                formik.values.id !==0  &&
+                (
+                    <div className="row">
+                    <Input id="id" name="id" 
                         TextLabel="Código:"
                         disabled
                         onChange={formik.handleChange}
                         value={formik.values.id }
                     />
+                    </div>
+                )
+            }
+            <div className="row">
+                
                 <Input id="nome" name="nome" type="text" onChange={formik.handleChange} TextLabel="Digite o nome:" errorClassName="text-danger small mt-1" value={formik.values.nome} error={formik.errors.nome} className="col p-3" inputClassName="form-control"/>
                 <Input id="dataNascimento" type="date" onChange={formik.handleChange} TextLabel="Escolha a data de nascimento:" errorClassName="text-danger small mt-1" error={formik.errors.dataNascimento} className="col p-3" inputClassName="form-control" value={formik.values.dataNascimento}/>
                 <div className="col mt-3">

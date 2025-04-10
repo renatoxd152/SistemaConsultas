@@ -29,14 +29,18 @@ export const PacienteForm:React.FC<PacienteProps> = ({
     )
     return(
         <form onSubmit={formik.handleSubmit}  className="order p-4 rounded shadow bg-white">
-            <div className="row">
-                  <Input id="id" name="id" 
-                                        TextLabel="Código:"
-                                        disabled
-                                        onChange={formik.handleChange}
-                                        value={formik.values.id }
-                                    />
-            </div>
+           {formik.values.id !== 0 && (
+                <div className="row">
+                    <Input 
+                    id="id" 
+                    name="id" 
+                    TextLabel="Código:"
+                    disabled
+                    onChange={formik.handleChange}
+                    value={formik.values.id}
+                    />
+                </div>
+                )}
             <div className="row">
                 <Input id="nome" name="nome" type="text" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.nome} error={formik.errors.nome} TextLabel="Nome do Paciente" className="col" inputClassName="form-control"/>
                 <Input id="CPF" name="cpf" type="text" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.cpf} error={formik.errors.cpf} TextLabel="CPF" className="col" inputClassName="form-control"/>
