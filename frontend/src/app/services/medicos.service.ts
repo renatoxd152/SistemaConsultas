@@ -31,10 +31,10 @@ export const useMedicoService = () =>
         }
 
     const deletar = async (id:any) : Promise<void> =>
-        {
-            const url:string = `${resourceURL}/${id}`
-            await httpClient.delete(url);
-        }
+    {
+        const url:string = `${resourceURL}/${id}`
+        await httpClient.delete(url);
+    }
     const atualizar = async (medico:Medico) : Promise<void> =>
     {
         const url:string = `${resourceURL}/${medico.id}`;

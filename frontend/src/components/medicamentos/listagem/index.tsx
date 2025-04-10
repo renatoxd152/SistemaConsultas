@@ -1,22 +1,23 @@
-import { Column } from "primereact/column";
-import { DataTable, DataTableStateEvent } from "primereact/datatable";
+import { DataTableStateEvent } from "primereact/datatable";
 import React, { useEffect, useState } from "react";
 import { Page } from "../../../app/models/common/page";
 import { Medicamento } from "../../../app/models/medicamentos";
 import { useMedicamentoService } from "../../../app/services/medicamentos.service";
+import { Alert } from "../../common/mensagem";
 import { Layout } from "../../layout";
-import "./index.css";
+import { ListagemMedicamentosTabela } from "./tabela";
 
-export const ListagemMedicamentos: React.FC = () => {
-  const service = useMedicamentoService();
-  
-  const [medicamentos, setMedicamentos] = useState<Page<Medicamento>>({
-    content: [],
-    first: 0,
-    number: 0,
-    size: 10,
-    totalElements: 0,
-  });
+export const ListagemMedicamentos:React.FC = () =>
+{
+      const service = useMedicamentoService();
+      const[mensagens,setMensagens] = useState<Array<Alert>>([])
+      const [medicamentos, setMedicamentos] = useState<Page<Medicamento>>({
+        content: [],
+        first: 0,
+        number: 0,
+        size: 10,
+        totalElements: 0,
+      });
 
   const handlePage = (event: DataTableStateEvent | null) => {
     service
@@ -29,6 +30,19 @@ export const ListagemMedicamentos: React.FC = () => {
       });
   };
 
+  const deletar = (medicamento:Medicamento)=>
+{
+    service.deletar(medicamento.id).then(response=>
+    {
+        handlePage(null);
+        setMensagens([{field:"alert alert-success",texto:"Medicamento deletado com sucesso!"}])
+    })
+    .catch(error=>
+    {
+        setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao deletar o medicamento!"}])
+    })
+}
+
   useEffect(() => {
     service
       .pages(0, 10)
@@ -38,37 +52,14 @@ export const ListagemMedicamentos: React.FC = () => {
       .catch((error) => console.error("Erro ao buscar dados:", error));
   }, []);
 
-  return (
-    <Layout
-      titulo="Listagem de Medicamentos"
-      tittleClassName="h1 display-6 fw-bold text-primary mt-4 text-center"
-    >
-      <div className="container mt-4">
-        <div className="card shadow rounded-3">
-          <div className="card-header bg-primary text-white text-center fw-bold">
-            Listagem de Medicamentos
-          </div>
-         
-            <DataTable
-              value={medicamentos.content}
-              totalRecords={medicamentos.totalElements}
-              lazy
-              paginator
-              first={medicamentos.first}
-              rows={medicamentos.size}
-              onPage={handlePage}
-              emptyMessage="Nenhum registro encontrado"
-              className="table"
-              paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
-              rowsPerPageOptions={[5, 10, 20]}
-              currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
-              paginatorClassName="custom-paginator"
-            >
-              <Column field="id" header="ID" />
-              <Column field="medicamento" header="Nome do Medicamento" />
-            </DataTable>
-        </div>
-      </div>
-    </Layout>
-  );
-};
+    return(
+        <Layout
+        titulo="Listagem de Medicamentos"
+        tittleClassName="h1 display-6 fw-bold text-primary mt-4 text-center"
+        mensagens={mensagens}
+      >
+        <ListagemMedicamentosTabela handlePage={handlePage} onDelete={deletar} medicamentos={medicamentos}/>
+      </Layout>
+
+    )
+}

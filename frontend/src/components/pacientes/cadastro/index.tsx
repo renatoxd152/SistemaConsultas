@@ -10,7 +10,7 @@ export const CadastroPaciente:React.FC=() =>
 {
     const[mensagens,setMensagens] = useState<Array<Alert>>([])
     const[paciente,setPaciente] = useState<Paciente>({})
-    console.log("PACIENTE:",paciente)
+  
     const service = usePacienteService()
     const{id} = useParams();
 

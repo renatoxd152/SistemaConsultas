@@ -58,6 +58,10 @@ const AppRoutes = () =>
           element: <CadastroMedicamentoPage/>,
         },
         {
+          path: "/medicamentos/editar/:id",
+          element: <CadastroMedicamentoPage/>,
+        },
+        {
           path: "/medicamentos/listar",
           element: <ListagemMedicamentosPage/>,
         },

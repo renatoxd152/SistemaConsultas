@@ -24,9 +24,29 @@ export const useMedicamentoService = () =>
         return response.data;
     }
 
+    const deletar = async (id:any) : Promise<void> =>
+    {
+        const url:string = `${resourceURL}/${id}`
+        await httpClient.delete(url);
+    }
+    const atualizar = async (medicamento:Medicamento) : Promise<void> =>
+    {
+        const url:string = `${resourceURL}/${medicamento.id}`;
+        await httpClient.put<Medicamento>(url,medicamento);
+    }
+
+    const getById = async (id:number) :Promise<Medicamento>=>
+    {
+        const url = `${resourceURL}/${id}`;
+        const response:AxiosResponse<Medicamento> = await httpClient.get(url);
+        return response.data;
+    }
     return{
         salvar,
         listar,
-        pages
+        pages,
+        deletar,
+        atualizar,
+        getById
     }
 }
