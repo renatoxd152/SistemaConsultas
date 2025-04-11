@@ -1,8 +1,8 @@
 import {
-    faCalendarCheck,
-    faPills,
-    faUserMd,
-    faUsers,
+  faCalendarCheck,
+  faPills,
+  faUserMd,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -40,7 +40,7 @@ export const DashboardForm: React.FC<DashboardProps> = ({
         colors: ["#8AD1C2", "#9F8AD1", "#D18A99", "#BCD18A", "#D1C28A"]
       };
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 min-vh-100">
       <div className="row g-4">
         <div className="col-md-6 col-xl-3">
           <div className="card bg-danger text-white shadow rounded-3 p-3 h-100">
