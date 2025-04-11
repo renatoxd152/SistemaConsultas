@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { Dashboard } from "../components/dashboards"
 import { useAuth } from "../components/provider/RotaAutenticada"
 import ConsultaCadastroPage from "../pages/cadastros/consultas"
 import CadastroMedicamentoPage from "../pages/cadastros/medicamentos"
@@ -80,6 +81,10 @@ const AppRoutes = () =>
         {
           path: "/relatorios",
           element: <RelatorioConsultasPage/>,
+        },
+        {
+          path: "/dashboards",
+          element: <Dashboard />
         },
         {
           path: "/logout",
