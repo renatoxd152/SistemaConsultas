@@ -36,7 +36,8 @@ public class SecurityConfiguration {
             "/api/medicamentos/**",
             "/api/medicos/**",
             "/api/pacientes/**",
-            "/api/dashboard/**"
+            "/api/dashboard/**",
+            "/api/usuarios/**"
     };
 
  
@@ -56,7 +57,8 @@ public class SecurityConfiguration {
             "/api/medicamentos/**",
             "/api/medicos/**",
             "/api/pacientes/**",
-            "/api/dashboard/**"
+            "/api/dashboard/**",
+            "/api/usuarios/**"
     };
 
     @Bean

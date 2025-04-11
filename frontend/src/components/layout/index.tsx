@@ -40,17 +40,33 @@ export const Layout: React.FC<LayoutProps> = (props: LayoutProps) => {
             <p className={props.tittleClassName}>{props.titulo}</p>
           </header>
           {emailUsuario && (
-            <div className="d-flex align-items-center gap-2 ms-auto">
-              <div className="fw-bold">Olá, {emailUsuario}</div>
-              <div
-                className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
-                style={{ width: "40px", height: "40px" }}
-              >
-                {emailUsuario.charAt(0).toUpperCase()}
-              </div>
-              
-            </div>
-          )}
+  <div className="dropdown ms-auto">
+    <div
+      className="d-flex align-items-center gap-2 dropdown-toggle"
+      id="userDropdown"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      role="button"
+      style={{ cursor: "pointer" }}
+    >
+      <div className="fw-bold">Olá, {emailUsuario}</div>
+      <div
+        className="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center"
+        style={{ width: "40px", height: "40px" }}
+      >
+        {emailUsuario.charAt(0).toUpperCase()}
+      </div>
+    </div>
+    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+      <li><a className="dropdown-item" href="/configuracoes">Configurações</a></li>
+      <li><button className="dropdown-item" onClick={() => {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+      }}>Sair</button></li>
+    </ul>
+  </div>
+)}
+
         </div>
 
           <div>

@@ -1,5 +1,6 @@
 package medico.consultas.backend.service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import medico.consultas.backend.model.UserDetailsImpl;
 import medico.consultas.backend.model.Usuario;
 import medico.consultas.backend.model.repository.RoleRepository;
 import medico.consultas.backend.model.repository.UsuarioRepository;
+import medico.consultas.backend.model.repository.projections.UsersRoles;
 import medico.consultas.backend.service.jwt.JwtTokenService;
 import lombok.Builder;
 @Service
@@ -73,7 +75,5 @@ public class UsuarioService {
         userRepository.save(newUser);
        
     }
-
-
 
 }

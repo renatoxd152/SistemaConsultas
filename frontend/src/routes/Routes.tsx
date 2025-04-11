@@ -12,6 +12,7 @@ import ListagemMedicamentosPage from "../pages/consultas/medicamentos"
 import MedicosListagemPage from "../pages/consultas/medicos"
 import ListagemPacientesPage from "../pages/consultas/pacientes"
 import RelatorioConsultasPage from "../pages/consultas/relatorios"
+import UsuariosTabela from "../pages/consultas/usuarios"
 import { ProtectedRoute } from "./ProtectedRoute"
 const AppRoutes = () =>
 {
@@ -57,6 +58,10 @@ const AppRoutes = () =>
         {
           path: "/medicamentos",
           element: <CadastroMedicamentoPage/>,
+        },
+        {
+          path:"/configuracoes",
+          element:<UsuariosTabela/>
         },
         {
           path: "/medicamentos/editar/:id",

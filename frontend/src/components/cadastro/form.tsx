@@ -1,6 +1,7 @@
 import '@fortawesome/fontawesome-free/css/all.css';
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Usuario } from '../../app/models/usuarios';
 import { Input } from "../common/input";
 import { Select } from '../common/select';
@@ -28,10 +29,14 @@ export const CadastroUsuario: React.FC<CadastroUsuarioProps> = (
         {value:1,label:"Administrador"},
         {value:2,label:"Comum"}
     ]
+    const navigate = useNavigate()
     const formik = useFormik(
         {
             initialValues:{...formScheme},
-            onSubmit,
+            onSubmit: async (values) => {
+                await onSubmit(values); 
+                navigate("/");
+            },
             validationSchema:validationScheme,
             validateOnChange: false
         }
