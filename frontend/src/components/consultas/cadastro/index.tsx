@@ -17,7 +17,7 @@ export const ConsultaCadastro:React.FC = () =>
     const servicePaciente = usePacienteService()
     const handleSubmit = async (consultaForm:ConsultaCadastroForm) =>
     {
-        console.log("FORMULÁRIO DE CONSULTA",consultaForm)
+     
         const medico:Medico = await serviceMedico.getById(consultaForm.medico_id);
         const paciente:Paciente = await servicePaciente.getById(consultaForm.paciente_id);
         
@@ -36,11 +36,9 @@ export const ConsultaCadastro:React.FC = () =>
         console.log(consulta)
         service.salvar(consulta).then(response=>
         {
-            console.log(response)
             setMensagens([{field:"alert alert-success",texto:"Consulta salva com sucesso!"}])
         }).catch(error=>
         {
-            console.log(error)
             setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao salvar a consulta!"}])
         }
         )

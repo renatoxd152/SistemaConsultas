@@ -57,6 +57,7 @@ export const CadastroMedicamentoForm: React.FC<CadastroFormProps> = ({ onSubmit,
                     <button type="submit" className="btn btn-primary w-100 py-2">{formik.values.id? "Atualizar":"Cadastrar"}</button>
                     <div className="d-flex justify-content-start mt-4">
                 <Button
+                    type="button"
                     label="Voltar para a listagem" 
                     className="btn btn-secondary" 
                     icon="pi pi-arrow-left" 

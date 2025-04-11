@@ -129,10 +129,11 @@ export const ConsultasForm:React.FC<ConsultasFormProps> = ({
             </div>
             <div className="d-flex justify-content-start mt-4">
                 <Button
+                    type="button"
                     label="Voltar para a listagem" 
                     className="btn btn-secondary" 
                     icon="pi pi-arrow-left" 
-                    onClick={() => navigate("/medicos/listar")} 
+                    onClick={() => navigate("/consultas/listar")} 
                 />
             </div>
         </form>

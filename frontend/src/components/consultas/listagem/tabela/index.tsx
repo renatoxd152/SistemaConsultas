@@ -80,6 +80,38 @@ export const TabelaConsultas: React.FC<TabelaConsultasProps> = ({
                 return data.toLocaleDateString("pt-BR");
               }}/>
             <Column field="prescricaoMedica" header="Prescrição Médica" />
+            <Column
+            header="Status"
+            body={(rowData) => {
+              const status = rowData.status as 1 | 2 | 3;
+
+              const statusMap: { [key in 1 | 2 | 3]: { text: string; color: string } } = {
+                1: { text: "Agendado", color: "#007bff" },   
+                2: { text: "Realizado", color: "#28a745" },  
+                3: { text: "Cancelado", color: "#dc3545" },
+              };
+
+              const { text, color } = statusMap[status] || { text: "Desconhecido", color: "#6c757d" };
+
+              return (
+                <span
+                  style={{
+                    backgroundColor: color,
+                    color: "#fff",
+                    padding: "4px 8px",
+                    borderRadius: "4px",
+                    fontSize: "0.85rem",
+                    display: "inline-block",
+                    minWidth: "90px",
+                    textAlign: "center"
+                  }}
+                >
+                  {text}
+                </span>
+              );
+            }}
+          />
+
             <Column header="" body={actionTemplate}/>
     
           </DataTable>
