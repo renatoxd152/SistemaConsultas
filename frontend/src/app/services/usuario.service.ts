@@ -16,9 +16,23 @@ export const useUsuarioService = () =>
         const response: AxiosResponse<Usuario> = await httpClient.post<Usuario>(url,usuario);
         return response.data;
     }
+   const getById = async (id:number) :Promise<Usuario>=>
+    {
+        const url = `${resourceURL}/${id}`;
+        const response:AxiosResponse<Usuario> = await httpClient.get(url);
+        return response.data;
+    }
+
+     const atualizar = async (usuario:Usuario) : Promise<void> =>
+    {
+        const url:string = `${resourceURL}/${usuario.id}`;
+        await httpClient.put<Usuario>(url,usuario);
+    }
   
     return{
         salvar,
-        login
+        login,
+        getById,
+        atualizar
     }
 }

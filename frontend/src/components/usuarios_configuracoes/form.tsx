@@ -1,10 +1,11 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 import { DataTable, DataTableStateEvent } from "primereact/datatable";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Page } from "../../app/models/common/page";
 import { UsuariosRoles } from "../../app/models/usuarioroles";
 interface ListagemUsuariosProps
@@ -33,8 +34,10 @@ export const ListagemUsuariosTabela: React.FC<ListagemUsuariosProps> = (
         accept: () => onDelete(usuario),
       });
     };
-const actionTemplate = (usuario:UsuariosRoles)=>
+    const navigate = useNavigate()
+    const actionTemplate = (usuario:UsuariosRoles)=>
     {
+        const url = `/usuarios/editar/${usuario.id}`
         return(
             <div>
                 <Button
@@ -44,10 +47,13 @@ const actionTemplate = (usuario:UsuariosRoles)=>
               >
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
+               <Button label="Editar " className="btn btn-primary btn-sm" onClick={() => navigate(url)}>
+                  <FontAwesomeIcon icon={faEdit} />
+                </Button>
             </div>
         )
     }
-
+  
   return (
       <div className="container mt-4">
         <div className="card shadow rounded-3">

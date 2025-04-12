@@ -18,6 +18,7 @@ export const LoginUsuario:React.FC = () =>
 
         service.login(usuario).then((response)=>
         {
+            console.log(response.token)
             if(response.token)
             {
                 setToken(response.token);

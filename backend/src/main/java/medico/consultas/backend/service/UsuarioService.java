@@ -75,5 +75,30 @@ public class UsuarioService {
         userRepository.save(newUser);
        
     }
+    
+    public void updateUser(Long userId, CreateUserDTO updatedUserDto) {
+        Usuario user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + userId));
+
+        Optional<Usuario> userWithSameLogin = userRepository.findByLogin(updatedUserDto.login());
+        if (userWithSameLogin.isPresent() && !userWithSameLogin.get().getId().equals(userId)) {
+            throw new RuntimeException("Já existe um usuário com esse login: " + updatedUserDto.login());
+        }
+
+        user.setLogin(updatedUserDto.login());
+        user.setSenha(securityConfiguration.passwordEncoder().encode(updatedUserDto.senha()));
+
+        Role role = roleRepository.findByRole(updatedUserDto.role())
+                                  .orElseGet(() -> {
+                                      Role newRole = new Role();
+                                      newRole.setName(updatedUserDto.role());
+                                      return roleRepository.save(newRole);
+                                  });
+
+        user.setRoles(List.of(role));
+
+        userRepository.save(user);
+    }
+
 
 }
