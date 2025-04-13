@@ -3,7 +3,7 @@ import { Button } from "primereact/button";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Paciente } from "../../../app/models/pacientes";
-import { Input } from "../../common/input";
+import { Input, InputCPF, InputRG } from "../../common/input";
 import { validationScheme } from "./validationSchema";
 interface PacienteProps{
     onSubmit:(paciente:Paciente)=>void;
@@ -46,10 +46,10 @@ export const PacienteForm:React.FC<PacienteProps> = ({
                 )}
             <div className="row">
                 <Input id="nome" name="nome" type="text" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.nome} error={formik.errors.nome} TextLabel="Nome do Paciente" className="col" inputClassName="form-control"/>
-                <Input id="CPF" name="cpf" type="text" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.cpf} error={formik.errors.cpf} TextLabel="CPF" className="col" inputClassName="form-control"/>
+                <InputCPF id="CPF" name="cpf" type="text" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.cpf} error={formik.errors.cpf} TextLabel="CPF" className="col" inputClassName="form-control" maxLength={14}/>
             </div>
             <div className="row">
-                <Input id="RG:" name="rg" type="text" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.rg} error={formik.errors.rg} TextLabel="RG" className="col" inputClassName="form-control"/>
+                <InputRG id="RG:" name="rg" type="text" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.rg} error={formik.errors.rg} TextLabel="RG" className="col" inputClassName="form-control" maxLength={9}/>
                 <Input id="dataNascimento" name="dataNascimento" type="date" onChange={formik.handleChange} errorClassName="text-danger small mt-1" value={formik.values.dataNascimento} error={formik.errors.dataNascimento} TextLabel="Data de Nascimento" className="col" inputClassName="form-control"/>
             </div>
             <div className="p-4">

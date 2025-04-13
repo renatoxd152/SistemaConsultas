@@ -1,7 +1,9 @@
 import React, { InputHTMLAttributes } from "react";
+import { formatarCPF, formatarRG } from "../../../app/util/cpf";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
+  name?:string;
   type?: string;
   TextLabel?: string;
   error?: string;
@@ -9,6 +11,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputClassName?: string;
   errorClassName?: string;
   icone?: string;
+  formatter?: (value: string) => string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -21,8 +24,28 @@ export const Input: React.FC<InputProps> = ({
     inputClassName,
     errorClassName,
     icone,
+    formatter,
+    name,
     ...props
   }: InputProps) => {
+
+    const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      let value = event.target.value;
+      const name = event.target.name;
+
+      const formattedValue = (formatter && formatter(value as string)) || value
+      if (onChange) {
+          onChange({
+              ...event,
+              target: {
+                  ...event.target,
+                  name,
+                  value: formattedValue,
+              },
+          });
+      }
+  };
+
     return (
       <div className={className}>
         {TextLabel && <label htmlFor={id}>{TextLabel}</label>}
@@ -47,7 +70,8 @@ export const Input: React.FC<InputProps> = ({
           <input
             type={type}
             id={id}
-            onChange={onChange}
+            name={name}
+            onChange={onInputChange}
             className={inputClassName}
             style={{
               flex: 1,
@@ -61,3 +85,17 @@ export const Input: React.FC<InputProps> = ({
       </div>
     );
   };
+
+  export const InputCPF:React.FC<InputProps> = (props:InputProps) =>
+  {
+      return(
+        <Input {...props} formatter={formatarCPF}/>
+      )
+  }
+
+  export const InputRG:React.FC<InputProps> = (props:InputProps) =>
+    {
+        return(
+          <Input {...props} formatter={formatarRG}/>
+        )
+    }
