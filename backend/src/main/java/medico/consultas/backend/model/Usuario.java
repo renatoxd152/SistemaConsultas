@@ -16,7 +16,6 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 
 @Table(name = "usuarios")
-@Entity(name = "User")
 public class Usuario {
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
