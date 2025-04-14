@@ -17,7 +17,6 @@ export const ListagemConsultas: React.FC = () =>
         size: 10,
         totalElements: 0,
     });
-   console.log(consultas)
     const deletar = (consulta:Consulta)=>
     {
         service.deletar(consulta.id).then(response=>

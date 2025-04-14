@@ -19,6 +19,7 @@ export const TabelaConsultas: React.FC<TabelaConsultasProps> = ({
   onDelete,
   handlePage
 }) => {
+  
   const confirmarDelecao = (event: React.MouseEvent, consulta:Consulta) => {
     confirmPopup({
       target: event.currentTarget as HTMLElement,

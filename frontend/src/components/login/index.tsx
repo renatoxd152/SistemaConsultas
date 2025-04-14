@@ -30,7 +30,7 @@ export const LoginUsuario:React.FC = () =>
         })
     }
     return(
-       <LayoutTelaInicial titulo="Login de usuário" mensagens={mensagens} tittleClassName="h1 display-6 fw-bold text-primary mt-4 text-center" styleDiv={{ backgroundColor: '#f0f8ff', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+       <LayoutTelaInicial titulo="Login de usuário" mensagens={mensagens} tittleClassName="h1 display-6 fw-bold text-primary mt-4 text-center">
             <LoginUsuarioForm onSubmit={handleSubmit}/>
        </LayoutTelaInicial>
     )
