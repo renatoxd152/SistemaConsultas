@@ -8,6 +8,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Page } from "../../../../app/models/common/page";
 import { Medicamento } from "../../../../app/models/medicamentos";
+import { Loader } from "../../../loader";
 import "./index.css";
 interface ListagemMedicamentosProps
 {
@@ -71,7 +72,7 @@ const actionTemplate = (medicamento:Medicamento)=>
           <div className="card-header bg-primary text-white text-center fw-bold">
             Listagem de Medicamentos
           </div>
-          
+          <Loader show={!medicamentos}/>
          <ConfirmPopup />
             <DataTable
               value={medicamentos.content}

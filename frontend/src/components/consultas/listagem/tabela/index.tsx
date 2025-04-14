@@ -8,6 +8,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Page } from "../../../../app/models/common/page";
 import { Consulta } from "../../../../app/models/consultas";
+import { Loader } from "../../../loader";
 interface TabelaConsultasProps {
   consultas:Page<Consulta>;
   onDelete: (consulta: Consulta) => void;
@@ -55,6 +56,7 @@ export const TabelaConsultas: React.FC<TabelaConsultasProps> = ({
           onClick={() => navigate("/consultas")}
         />
       </div>
+            <Loader show={!consultas}/>
             <DataTable
             value={consultas.content}
             totalRecords={consultas.totalElements}

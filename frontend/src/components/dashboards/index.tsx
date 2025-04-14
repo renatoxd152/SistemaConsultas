@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DashboardData } from "../../app/models/dashboard";
 import { useDashboardService } from "../../app/services/dashboard.service";
 import { Layout } from "../layout";
+import { Loader } from "../loader";
 import { DashboardForm } from "./form";
 
 export const Dashboard: React.FC = () => {
@@ -21,22 +22,27 @@ export const Dashboard: React.FC = () => {
     fetchData();
   }, []);
 
-  if (!dashboard) {
-    return <p>Carregando...</p>;
-  }
-
+ 
   return (
     <Layout
       titulo="Dashboards"
       tittleClassName="h1 display-6 fw-bold text-primary mt-4 text-center"
     >
-      <DashboardForm
-        medicamentos={dashboard.medicamentos}
-        pacientes={dashboard.pacientes}
-        medicos={dashboard.medicos}
-        consultas={dashboard.consultas}
-        consultas_status={dashboard.consultas_status}
-      />
+      <Loader show={!dashboard}/>
+      {
+        dashboard &&
+        (
+          
+          <DashboardForm
+            medicamentos={dashboard.medicamentos}
+            pacientes={dashboard.pacientes}
+            medicos={dashboard.medicos}
+            consultas={dashboard.consultas}
+            consultas_status={dashboard.consultas_status}
+          />
+        )
+      }
+    
     </Layout>
   );
 };

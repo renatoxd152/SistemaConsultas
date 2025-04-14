@@ -8,6 +8,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Page } from "../../../../app/models/common/page";
 import { Paciente } from "../../../../app/models/pacientes";
+import { Loader } from "../../../loader";
 interface TabelaPacientesProps {
   pacientes:Page<Paciente>;
   onDelete: (paciente:Paciente) => void;
@@ -60,6 +61,7 @@ export const TabelaPacientes: React.FC<TabelaPacientesProps> = ({
           onClick={() => navigate("/pacientes")}
         />
       </div>
+            <Loader show={!pacientes}/>
            <ConfirmPopup />
             <DataTable
             value={pacientes.content}

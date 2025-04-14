@@ -11,6 +11,7 @@ import { Medico } from "../../../app/models/medicos";
 import { useMedicoService } from "../../../app/services/medicos.service";
 import { Alert } from "../../common/mensagem";
 import { Layout } from "../../layout";
+import { Loader } from "../../loader";
 export const Listagem: React.FC = () => {
   const service = useMedicoService();
   const[mensagens,setMensagens] = useState<Array<Alert>>([])
@@ -110,6 +111,7 @@ export const Listagem: React.FC = () => {
           <div className="card-header bg-primary text-white text-center fw-bold">
             Listagem de Médicos
           </div>
+          <Loader show={!medicos}/>
           <ConfirmPopup />
             <DataTable
               value={medicos.content}
