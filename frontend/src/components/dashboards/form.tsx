@@ -25,20 +25,25 @@ export const DashboardForm: React.FC<DashboardProps> = ({
   consultas_status
 }) => {
 
-    const chartData = [
+  const hasConsultasData = consultas_status && consultas_status.length > 0;
+
+  const chartData = hasConsultasData
+    ? [
         ["Status", "Total"],
         ["Agendada", consultas_status?.find(s => s.status === "1")?.total ?? 0],
         ["Realizada", consultas_status?.find(s => s.status === "2")?.total ?? 0],
         ["Cancelada", consultas_status?.find(s => s.status === "3")?.total ?? 0]
-      ];
+      ]
+    : [["Status", "Total"], ["Sem Dados", 0]];
 
-      const chartOptions = {
-        title: "Status das Consultas",
-        pieHole: 0.4,
-        is3D: true,
-        legend: { position: "bottom" },
-        colors: ["#8AD1C2", "#9F8AD1", "#D18A99", "#BCD18A", "#D1C28A"]
-      };
+  const chartOptions = {
+    title: "Status das Consultas",
+    pieHole: 0.4,
+    is3D: true,
+    legend: { position: "bottom" },
+    colors: ["#8AD1C2", "#9F8AD1", "#D18A99", "#BCD18A", "#D1C28A"]
+  };
+
   return (
     <div className="container mt-4 min-vh-100">
       <div className="row g-4">
@@ -90,16 +95,22 @@ export const DashboardForm: React.FC<DashboardProps> = ({
           </div>
         </div>
       </div>
-      <div className="mt-5">
-        <Chart
-            chartType="PieChart"
-            width="100%"
-            height="400px"
-            data={chartData}
-            options={chartOptions}
-        />
+      
+      {hasConsultasData ? (
+        <div className="mt-5">
+          <Chart
+              chartType="PieChart"
+              width="100%"
+              height="400px"
+              data={chartData}
+              options={chartOptions}
+          />
         </div>
-
+      ) : (
+        <div className="mt-5 text-center">
+          <p className="alert alert-warning">Não tem como exibir o gráfico de consultas, porque nenhuma consulta foi cadastrada.</p>
+        </div>
+      )}
     </div>
   );
 };

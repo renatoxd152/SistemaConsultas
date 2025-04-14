@@ -24,7 +24,7 @@ export const LoginUsuarioForm: React.FC<LoginUsuarioProps> = ({ onSubmit }) => {
     });
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100">
+        <div className="d-flex justify-content-center align-items-center">
             <div className="shadow-lg rounded bg-white d-flex flex-md-row flex-column overflow-hidden" style={{ width: "100vw",height:"60vh"}}>
                 
                 <div className="bg-primary text-white d-flex flex-column justify-content-center align-items-center p-4" style={{ minWidth: "300px", flex: 1 }}>

@@ -44,6 +44,7 @@ export const CadastroMedicamentoForm: React.FC<CadastroFormProps> = ({ onSubmit,
                                     </div>)}
                     <Input 
                         id="medicamento" 
+                        name="medicamento"
                         type="text" 
                         onChange={formik.handleChange} 
                         TextLabel="Nome do medicamento:" 
