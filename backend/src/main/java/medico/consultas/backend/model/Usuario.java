@@ -14,7 +14,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Builder;
-
+@Entity
 @Table(name = "usuarios")
 public class Usuario {
 	 	@Id
