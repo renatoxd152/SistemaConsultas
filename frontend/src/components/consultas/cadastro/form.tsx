@@ -107,8 +107,8 @@ export const ConsultasForm:React.FC<ConsultasFormProps> = ({
     return(
         <form onSubmit={formik.handleSubmit} className="order p-4 rounded shadow bg-white">
             <div className="row">
-                <Select id="medico" name="medico_id" label="Selecione o médico:" onChange={formik.handleChange} opcoes={medicosFormatados} value={formik.values.medico_id} className="col input-group mb-5 mt-4" selectClassName="form-select" labelClassName="input-group-text"/>
-                <Select id="paciente" name="paciente_id" label="Selecione o paciente:" onChange={formik.handleChange} opcoes={pacientesFormatados} value={formik.values.paciente_id} className="col input-group mb-5 mt-4" selectClassName="form-select" labelClassName="input-group-text"/>
+                <Select id="medico" name="medico_id" label="Selecione o médico:" onChange={formik.handleChange} opcoes={medicosFormatados} value={formik.values.medico_id} className="col" selectClassName="form-select" labelClassName="input-group-text"/>
+                <Select id="paciente" name="paciente_id" label="Selecione o paciente:" onChange={formik.handleChange} opcoes={pacientesFormatados} value={formik.values.paciente_id} className="col" selectClassName="form-select" labelClassName="input-group-text"/>
                 <Input id="dia" type="date" name="data" onChange={formik.handleChange} value={formik.values.data} TextLabel="Escolha a data" errorClassName="text-danger small mt-1" error={formik.errors.data} className="col" inputClassName="form-control"/>
                 <Input id="data" type="time" name="hora" onChange={formik.handleChange} value={formik.values.hora} TextLabel="Escolha o horário" errorClassName="text-danger small mt-1" error={formik.errors.hora} className="col" inputClassName="form-control"/>
             </div>
