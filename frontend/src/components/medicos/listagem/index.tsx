@@ -122,7 +122,6 @@ export const Listagem: React.FC = () => {
               rows={medicos.size}
               onPage={handlePage}
               emptyMessage="Nenhum registro encontrado"
-              className="table"
               paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
               rowsPerPageOptions={[5, 10, 20]}
               currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
