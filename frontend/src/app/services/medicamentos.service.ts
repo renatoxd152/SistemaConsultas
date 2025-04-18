@@ -17,9 +17,15 @@ export const useMedicamentoService = () =>
     }
 
     const pages = async( page:number =0,
-        size:number =10):Promise<Page<Medicamento>> =>
+        size:number =10,sortField?:string,sortOrder?:number | null):Promise<Page<Medicamento>> =>
     {
-        const url = `${resourceURL}/listar/paginas?page=${page}&size=${size}`
+        let url = `${resourceURL}/listar/paginas?page=${page}&size=${size}`
+
+        if (sortField) {
+            const direction = sortOrder === 1 ? 'asc' : 'desc';
+            url += `&sort=${sortField},${direction}`;
+          }
+
         const response: AxiosResponse<Page<Medicamento>> = await httpClient.get(url);
         return response.data;
     }

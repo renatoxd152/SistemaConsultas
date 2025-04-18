@@ -11,38 +11,64 @@ export const ListagemMedicamentos:React.FC = () =>
 {
       const service = useMedicamentoService();
       const[mensagens,setMensagens] = useState<Array<Alert>>([])
+      
       const [medicamentos, setMedicamentos] = useState<Page<Medicamento>>({
         content: [],
         first: 0,
         number: 0,
         size: 10,
         totalElements: 0,
+        sortField:"",
+        sortOrder:null,
+        filters:{
+            medicamento:{value:'',matchMode: 'contains'}
+        }
       });
 
-  const handlePage = (event: DataTableStateEvent | null) => {
-    service
-      .pages(event?.page, event?.rows)
-      .then((result) => {
-        setMedicamentos({ ...result, first: event?.first ?? 0 });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+      const handlePage = (event: DataTableStateEvent | null) => {
+        const sortField = event?.sortField ?? medicamentos.sortField ?? undefined;
+        const sortOrder = event?.sortOrder ?? medicamentos.sortOrder;
+      
+        service
+          .pages(event?.page, event?.rows, sortField, sortOrder)
+          .then((result) => {
+            setMedicamentos({
+              ...result,
+              first: event?.first ?? 0,
+              sortField,
+              sortOrder,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+      
+      
 
   const deletar = (medicamento:Medicamento)=>
-{
-    service.deletar(medicamento.id).then(response=>
-    {
-        handlePage(null);
-        setMensagens([{field:"alert alert-success",texto:"Medicamento deletado com sucesso!"}])
-    })
-    .catch(error=>
-    {
-        setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao deletar o medicamento!"}])
-    })
-}
+  {
+      service.deletar(medicamento.id).then(response=>
+      {
+          handlePage(null);
+          setMensagens([{field:"alert alert-success",texto:"Medicamento deletado com sucesso!"}])
+      })
+      .catch(error=>
+      {
+          setMensagens([{field:"alert alert-danger",texto:"Houve um erro ao deletar o medicamento!"}])
+      })
+  }
 
+
+
+  // const onFilter = (event: DataTableFilterEvent) => {
+    
+  //   event['first'] = 0;
+  //   setMedicamentos({
+  //     ...medicamentos,
+  //     filters:event.filters?.medicamento ?? {},
+  //   })
+  // };
   useEffect(() => {
     service
       .pages(0, 10)

@@ -82,6 +82,9 @@ const actionTemplate = (medicamento:Medicamento)=>
               first={medicamentos.first}
               rows={medicamentos.size}
               onPage={handlePage}
+              onSort={handlePage}
+              sortField={medicamentos.sortField}
+              sortOrder={medicamentos.sortOrder}
               emptyMessage="Nenhum registro encontrado"
               paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
               rowsPerPageOptions={[5, 10, 20]}
@@ -89,7 +92,7 @@ const actionTemplate = (medicamento:Medicamento)=>
               paginatorClassName="custom-paginator"
             >
               <Column field="id" header="ID" />
-              <Column field="medicamento" header="Nome do Medicamento" />
+              <Column field="medicamento" sortable header="Nome do Medicamento" />
               <Column header="" body={actionTemplate}/>
             </DataTable>
         </div>
