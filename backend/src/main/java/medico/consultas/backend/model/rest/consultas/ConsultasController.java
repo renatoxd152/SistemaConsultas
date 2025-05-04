@@ -94,7 +94,7 @@ public class ConsultasController {
 		var fileName = "relatorio-consultas.pdf";
 		
 		headers.setContentDispositionFormData("inline;filename=\"" + fileName + "\"",fileName);
-		headers.setCacheControl("must-revalidate,post-check=0,pre-cehck=0");
+		headers.setCacheControl("must-revalidate,post-check=0,pre-check=0");
 		
 		var responseEntity = new ResponseEntity<>(relatorioGerado,headers,HttpStatus.OK);
 		
