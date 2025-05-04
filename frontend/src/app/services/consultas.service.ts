@@ -25,6 +25,7 @@ export const useConsultaService = () =>
     {
         const url = `${resourceURL}/relatorio-consultas?inicio=${dataInicial}&fim=${dataFinal}`;
         const response:AxiosResponse= await httpClient.get(url,{responseType:'blob'})  
+        console.log(response.data)
         const bytes = response.data;
         return new Blob([bytes],{type:'application/pdf'})
     }

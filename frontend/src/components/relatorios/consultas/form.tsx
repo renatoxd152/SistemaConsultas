@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Input } from "../../common/input";
+import { Loader } from "../../loader";
 
 interface RelatorioConsultasFormProps {
   onSubmit: (form:FormDataProps) => void;
+  carregando:boolean;
 }
 export interface FormDataProps
 {
@@ -11,7 +13,7 @@ export interface FormDataProps
     dataFinal:string;
 }
 export const RelatorioConsultasForm: React.FC<RelatorioConsultasFormProps> = ({
-  onSubmit
+  onSubmit,carregando
 }) => {
   const formScheme:FormDataProps = {
     dataInicial: "",
@@ -62,9 +64,15 @@ export const RelatorioConsultasForm: React.FC<RelatorioConsultasFormProps> = ({
         </div>
       </div>
 
-      <button type="submit" className="btn btn-primary btn-sm">
-        Gerar Relatório
-      </button>
+      {carregando ? (
+         <div className="d-flex justify-content-center align-items-center" style={{ height: "100px" }}>
+          <Loader show={carregando} />
+        </div>
+      ) : (
+        <button type="submit" className="btn btn-primary btn-sm">
+          Gerar Relatório
+        </button>
+      )}
     </form>
   );
 };

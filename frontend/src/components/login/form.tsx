@@ -4,13 +4,15 @@ import { useFormik } from "formik";
 import React from "react";
 import { Usuario } from "../../app/models/usuarios";
 import { Input } from "../common/input";
+import { Loader } from "../loader";
 import { validationScheme } from "./validationSchema";
 
 interface LoginUsuarioProps {
     onSubmit: (usuario: Usuario) => void;
+    carregando:boolean;
 }
 
-export const LoginUsuarioForm: React.FC<LoginUsuarioProps> = ({ onSubmit }) => {
+export const LoginUsuarioForm: React.FC<LoginUsuarioProps> = ({ onSubmit,carregando }) => {
     const formScheme: Usuario = {
         login: "",
         senha: "",
@@ -33,42 +35,51 @@ export const LoginUsuarioForm: React.FC<LoginUsuarioProps> = ({ onSubmit }) => {
                 </div>
                 <div className="p-4 d-flex flex-column justify-content-center" style={{ flex: 1 }}>
                     <form onSubmit={formik.handleSubmit} className="w-100 text-center">
-                        <h4 className="text-primary mb-4">Acesse sua Conta</h4>
+                    {
+                        carregando ? (
+                            <Loader show={carregando} />
+                        ) : (
+                            <>
+                                <h4 className="text-primary mb-4">Acesse sua Conta</h4>
 
-                        <Input
-                            id="login"
-                            name="login"
-                            type="text"
-                            icone="fas fa-user"
-                            onChange={formik.handleChange}
-                            error={formik.errors.login}
-                            className="mb-3"
-                            inputClassName="form-control"
-                            value={formik.values.login}
-                            errorClassName="text-danger small mt-1"
-                            placeholder="Digite seu login"
-                        />
-                        <Input
-                            id="senha"
-                            name="senha"
-                            type="password"
-                            icone="fas fa-lock"
-                            onChange={formik.handleChange}
-                            error={formik.errors.senha}
-                            className="mb-3"
-                            inputClassName="form-control"
-                            value={formik.values.senha}
-                            errorClassName="text-danger small mt-1"
-                            placeholder="Digite sua senha"
-                        />
+                                <Input
+                                    id="login"
+                                    name="login"
+                                    type="text"
+                                    icone="fas fa-user"
+                                    onChange={formik.handleChange}
+                                    error={formik.errors.login}
+                                    className="mb-3"
+                                    inputClassName="form-control"
+                                    value={formik.values.login}
+                                    errorClassName="text-danger small mt-1"
+                                    placeholder="Digite seu login"
+                                />
+                                <Input
+                                    id="senha"
+                                    name="senha"
+                                    type="password"
+                                    icone="fas fa-lock"
+                                    onChange={formik.handleChange}
+                                    error={formik.errors.senha}
+                                    className="mb-3"
+                                    inputClassName="form-control"
+                                    value={formik.values.senha}
+                                    errorClassName="text-danger small mt-1"
+                                    placeholder="Digite sua senha"
+                                />
 
-                        <button type="submit" className="btn btn-primary w-100 py-2">Entrar</button>
+                                <button type="submit" className="btn btn-primary w-100 py-2">Entrar</button>
 
-                        <div className="mt-3">
-                            <a href="/cadastro" className="text-decoration-none text-primary">
-                                <i className="fas fa-user-plus me-2"></i>Não tem uma conta? Cadastre-se
-                            </a>
-                        </div>
+                                <div className="mt-3">
+                                    <a href="/cadastro" className="text-decoration-none text-primary">
+                                        <i className="fas fa-user-plus me-2"></i>Não tem uma conta? Cadastre-se
+                                    </a>
+                                </div>
+                            </>
+                        )
+                    }
+                                        
                     </form>
                 </div>
             </div>
