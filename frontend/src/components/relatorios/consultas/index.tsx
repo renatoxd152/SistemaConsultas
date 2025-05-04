@@ -9,6 +9,7 @@ export const RelatorioConsultas:React.FC = () =>
     const[carregando,setCarregando] = useState(false)
     const service = useConsultaService();
     const handleSubmit = (form: FormDataProps) => {
+        
         try {
             setCarregando(true)
             let dataInicialFormatada = '';
@@ -25,14 +26,15 @@ export const RelatorioConsultas:React.FC = () =>
             }
            
             service.gerarRelatorioVendas(dataInicialFormatada, dataFinalFormatada).then(blob => {
+                if (!blob || blob.size === 0) {
+                    throw new Error("O relatório está vazio ou não foi gerado.");
+                }
                 const fileURL = URL.createObjectURL(blob);
                 window.open(fileURL);
+                setCarregando(false)
             });
         } catch (err) {
             console.error("Erro ao gerar relatório:", err);
-            alert("Ocorreu um erro ao processar as datas.");
-        }finally{
-            setCarregando(false)
         }
     };
     
