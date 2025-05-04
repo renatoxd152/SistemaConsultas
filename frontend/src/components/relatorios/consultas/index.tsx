@@ -21,7 +21,7 @@ export const RelatorioConsultas:React.FC = () =>
                 const dataFinal = parseISO(form.dataFinal);
                 dataFinalFormatada = format(dataFinal, 'dd/MM/yyyy');
             }
-    
+            console.log(service.gerarRelatorioVendas(dataInicialFormatada, dataFinalFormatada))
             service.gerarRelatorioVendas(dataInicialFormatada, dataFinalFormatada).then(blob => {
                 const fileURL = URL.createObjectURL(blob);
                 window.open(fileURL);

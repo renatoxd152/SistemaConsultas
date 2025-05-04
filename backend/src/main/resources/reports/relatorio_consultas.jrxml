@@ -130,9 +130,7 @@ WHERE
 	</columnHeader>
 	<detail>
 		<band height="30" splitType="Stretch">
-			<element kind="rectangle" uuid="8b8c44e2-43bd-4cf4-9dc8-49cfe0e4f65c" mode="Opaque" x="-10" y="0" width="566" height="30" backcolor="#F5F5F5">
-				<printWhenExpression><![CDATA[new java.lang.Boolean($V{REPORT_COUNT}%2 == 0)]]></printWhenExpression>
-			</element>
+			<element kind="rectangle" uuid="8b8c44e2-43bd-4cf4-9dc8-49cfe0e4f65c" mode="Opaque" x="-10" y="0" width="566" height="30" backcolor="#F5F5F5"/>
 			<element kind="textField" uuid="fdebc98f-56f8-41d7-b4d1-3ad84d4bc6ca" x="-10" y="0" width="90" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{id}]]></expression>
 			</element>
