@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { DataTable, DataTableStateEvent } from "primereact/datatable";
+import { Toolbar } from "primereact/toolbar";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Page } from "../../../app/models/common/page";
@@ -75,13 +76,13 @@ export const Listagem: React.FC = () => {
         return(
             <div>
                 <Button label="Editar"
-                className="btn btn-primary btn-sm"
+                className="btn btn-primary btn-sm m-1"
                 onClick={()=>navigate(url)}
                 > <FontAwesomeIcon icon={faEdit} className="me-2" /></Button>
                 
                 <Button 
                 label="Deletar"  
-                className="btn btn-danger btn-sm" 
+                className="btn btn-danger btn-sm m-1" 
                 onClick={(e) => confirmarDelecao(e, medico)}
               >
                 <FontAwesomeIcon icon={faTrash} />
@@ -89,6 +90,15 @@ export const Listagem: React.FC = () => {
             </div>
         )
     }
+
+    const leftToolbarTemplate  = () => {
+        return (
+            <div className="flex flex-wrap gap-2">
+                <Button label="Adicionar novo médico" icon="pi pi-plus" severity="success" onClick={() => navigate("/medicos/cadastrar")} />
+                
+            </div>
+        );
+    };
 
   return (
     <Layout
@@ -98,16 +108,10 @@ export const Listagem: React.FC = () => {
       mensagens={mensagens}
     >
       
-      <div className="d-flex justify-content-end my-3">
-        <Button
-          label="Adicionar novo médico"
-          className="btn btn-success"
-          icon="pi pi-plus"
-          onClick={() => navigate("/medicos/cadastrar")}
-        />
-      </div>
       <div className="container mt-4">
+      <Toolbar className="mb-4" start={leftToolbarTemplate}></Toolbar>   
         <div className="card shadow rounded-3">
+          
           <div className="card-header bg-primary text-white text-center fw-bold">
             Listagem de Médicos
           </div>

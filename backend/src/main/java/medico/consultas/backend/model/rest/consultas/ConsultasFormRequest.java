@@ -1,6 +1,8 @@
 package medico.consultas.backend.model.rest.consultas;
 
 
+import java.sql.Date;
+
 import medico.consultas.backend.model.Consultas;
 import medico.consultas.backend.model.Medico;
 import medico.consultas.backend.model.Paciente;
@@ -8,7 +10,7 @@ import medico.consultas.backend.model.Paciente;
 
 public class ConsultasFormRequest {
 	private Long id; 
-	private String data; 
+	private Date data; 
 	private String hora;
 	private String motivo;
 	private String tipo;
@@ -19,7 +21,7 @@ public class ConsultasFormRequest {
 	private Medico medico;
 
 
-	public ConsultasFormRequest(Long id, String data, String hora, String motivo, String tipo, String status,
+	public ConsultasFormRequest(Long id, Date data, String hora, String motivo, String tipo, String status,
 			String observacoes, String prescricaoMedica, Paciente  paciente,Medico medico) {
 		super();
 		this.id = id;
@@ -34,7 +36,7 @@ public class ConsultasFormRequest {
 		this.medico = medico;
 	}
 
-	public ConsultasFormRequest(String data, String hora, String motivo, String tipo, String status, String observacoes,
+	public ConsultasFormRequest(Date data, String hora, String motivo, String tipo, String status, String observacoes,
 			String prescricaoMedica, Paciente paciente,Medico medico) {
 		super();
 		this.data = data;
@@ -87,13 +89,13 @@ public class ConsultasFormRequest {
 
 
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
 
 
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 

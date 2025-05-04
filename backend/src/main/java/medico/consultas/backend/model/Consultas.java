@@ -1,6 +1,9 @@
 package medico.consultas.backend.model;
 
 
+import java.sql.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -19,7 +22,8 @@ public class Consultas {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "data")
-	private String data;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date data;
 	@Column(name="hora")
 	private String hora;
 	@Column(name = "motivo",length = 300)
@@ -41,7 +45,7 @@ public class Consultas {
 	@JoinColumn(name="medico_id")
 	private Medico medico;
 
-	public Consultas(Long id, String data, String hora, String motivo, String tipo, String status, String observacoes,
+	public Consultas(Long id, Date data, String hora, String motivo, String tipo, String status, String observacoes,
 			String prescricaoMedica, Paciente paciente, Medico medico) {
 		super();
 		this.id = id;
@@ -57,7 +61,7 @@ public class Consultas {
 	}
 
 
-	public Consultas(String data, String hora, String motivo, String tipo, String status, String observacoes,
+	public Consultas(Date data, String hora, String motivo, String tipo, String status, String observacoes,
 			String prescricaoMedica, Paciente paciente, Medico medico) {
 		super();
 		this.data = data;
@@ -95,14 +99,14 @@ public class Consultas {
 
 
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
 
 
 
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 

@@ -36,6 +36,7 @@ export const RelatorioConsultasForm: React.FC<RelatorioConsultasFormProps> = ({
           <Input
             id="dataInicial"
             type="date"
+            name="dataInicial"
             onChange={formik.handleChange}
             TextLabel="Escolha a data inicial"
             errorClassName="text-danger small mt-1"
@@ -49,6 +50,7 @@ export const RelatorioConsultasForm: React.FC<RelatorioConsultasFormProps> = ({
           <Input
             id="dataFinal"
             type="date"
+            name="dataFinal"
             onChange={formik.handleChange}
             TextLabel="Escolha a data final"
             errorClassName="text-danger small mt-1"

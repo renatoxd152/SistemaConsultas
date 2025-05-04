@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { DataTable, DataTableStateEvent } from "primereact/datatable";
+import { Toolbar } from "primereact/toolbar";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Page } from "../../../../app/models/common/page";
@@ -31,6 +32,15 @@ export const TabelaPacientes: React.FC<TabelaPacientesProps> = ({
       accept: () => onDelete(paciente),
     });
   };
+
+  const leftToolbarTemplate  = () => {
+    return (
+        <div className="flex flex-wrap gap-2">
+            <Button label="Adicionar novo Paciente" icon="pi pi-plus" severity="success" onClick={() => navigate("/pacientes")} />
+            
+        </div>
+    );
+};
   const actionTemplate = (paciente:Paciente)=>
     {
         
@@ -39,12 +49,12 @@ export const TabelaPacientes: React.FC<TabelaPacientesProps> = ({
             <div>
                 <Button 
                 label="Deletar "  
-                className="btn btn-danger btn-sm" 
+                className="btn btn-danger btn-sm m-1" 
                 onClick={(e) => confirmarDelecao(e, paciente)}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
-              <Button label="Editar " className="btn btn-primary btn-sm" onClick={() => navigate(url)}>
+              <Button label="Editar " className="btn btn-primary btn-sm m-1" onClick={() => navigate(url)}>
               <FontAwesomeIcon icon={faEdit} />
               </Button>
             </div>
@@ -53,16 +63,11 @@ export const TabelaPacientes: React.FC<TabelaPacientesProps> = ({
   return (
     
     <div className="table-responsive">
-        <div className="d-flex justify-content-end my-3">
-        <Button
-          label="Adicionar novo paciente"
-          className="btn btn-success"
-          icon="pi pi-plus"
-          onClick={() => navigate("/pacientes")}
-        />
-      </div>
             <Loader show={!pacientes}/>
            <ConfirmPopup />
+           
+                
+            <Toolbar className="mb-4" start={leftToolbarTemplate}></Toolbar>   
             <DataTable
             value={pacientes.content}
             totalRecords={pacientes.totalElements}

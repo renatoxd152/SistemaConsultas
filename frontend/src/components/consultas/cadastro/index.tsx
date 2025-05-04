@@ -17,13 +17,13 @@ export const ConsultaCadastro:React.FC = () =>
     const servicePaciente = usePacienteService()
     const handleSubmit = async (consultaForm:ConsultaCadastroForm) =>
     {
-     
+        const dataConsulta = new Date(consultaForm.data);
         const medico:Medico = await serviceMedico.getById(consultaForm.medico_id);
         const paciente:Paciente = await servicePaciente.getById(consultaForm.paciente_id);
         
         const consulta = {
             id: consultaForm.id,
-            data: consultaForm.data,
+            data: dataConsulta,
             hora: consultaForm.hora,
             motivo: consultaForm.motivo,
             tipo: consultaForm.tipo,

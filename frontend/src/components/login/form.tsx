@@ -25,8 +25,7 @@ export const LoginUsuarioForm: React.FC<LoginUsuarioProps> = ({ onSubmit }) => {
 
     return (
         <div className="d-flex justify-content-center align-items-center">
-            <div className="shadow-lg rounded bg-white d-flex flex-md-row flex-column overflow-hidden" style={{ width: "100vw",height:"60vh"}}>
-                
+            <div className="rounded bg-white border border-light d-flex flex-md-row flex-column overflow-hidden shadow-sm" style={{ width: "100vw", height: "60vh" }}>
                 <div className="bg-primary text-white d-flex flex-column justify-content-center align-items-center p-4" style={{ minWidth: "300px", flex: 1 }}>
                     <i className="fas fa-clinic-medical fa-4x mb-3"></i>
                     <h3 className="mb-3">Clínica Vida e Saúde</h3>

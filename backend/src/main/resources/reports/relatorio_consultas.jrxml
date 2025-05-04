@@ -1,16 +1,35 @@
 <!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
-<jasperReport name="relatorio_consultas" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9aa727c-5cb9-49ca-b2aa-3160d804c0fe">
+<jasperReport name="relatorio_consultas" language="java" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9aa727c-5cb9-49ca-b2aa-3160d804c0fe">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="bancoConsultas.jrdax"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<query language="sql"><![CDATA[select c.id,c.data,c.hora,c.motivo,c.observacoes,c.prescricao_medica,c.status,c.tipo,m.nome as nome_medico,p.nome as nome_paciente
-from consultas c join pacientes p on c.paciente_id = p.id
-join medicos m ON m.id = c.medico_id]]></query>
+	<parameter name="DATA_INICIO" class="java.util.Date"/>
+	<parameter name="DATA_FIM" class="java.util.Date"/>
+	<query language="sql"><![CDATA[SELECT 
+    c.id,
+    c.data,
+    c.hora,
+    c.motivo,
+    c.observacoes,
+    c.prescricao_medica,
+    c.status,
+    c.tipo,
+    m.nome AS nome_medico,
+    p.nome AS nome_paciente
+FROM 
+    consultas c
+JOIN 
+    pacientes p ON c.paciente_id = p.id
+JOIN 
+    medicos m ON m.id = c.medico_id
+WHERE 
+    c.data BETWEEN $P{DATA_INICIO} AND $P{DATA_FIM}
+]]></query>
 	<field name="id" class="java.lang.Long">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
 		<property name="com.jaspersoft.studio.field.label" value="id"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="consultas"/>
 	</field>
-	<field name="data" class="java.lang.String">
+	<field name="data" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.name" value="data"/>
 		<property name="com.jaspersoft.studio.field.label" value="data"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="consultas"/>
@@ -67,104 +86,99 @@ join medicos m ON m.id = c.medico_id]]></query>
 				<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 			</box>
 		</element>
+		<element kind="textField" uuid="71d6921d-2cbb-4ac5-8e2b-a3392e56926b" x="450" y="0" width="94" height="30" pattern="d/M/yy h:mm" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="staticText" uuid="e7a29aab-191e-4643-891e-62b429377784" x="390" y="0" width="60" height="30" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Gerado em:]]></text>
+		</element>
 	</title>
 	<pageHeader height="35" splitType="Stretch"/>
 	<columnHeader height="25" splitType="Stretch">
-		<element kind="staticText" uuid="9606e7b6-7d9f-4c0c-a244-5c4fcd3b7dcb" mode="Opaque" x="-10" y="0" width="100" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="9606e7b6-7d9f-4c0c-a244-5c4fcd3b7dcb" mode="Opaque" x="-10" y="0" width="90" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[id]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09a2b768-b4fa-4731-bafd-dcf6fb8b1321"/>
 		</element>
-		<element kind="staticText" uuid="44804af3-b54a-47c6-9440-e5ca7d976f0e" mode="Opaque" x="230" y="0" width="50" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="44804af3-b54a-47c6-9440-e5ca7d976f0e" mode="Opaque" x="229" y="0" width="50" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Motivo]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5ae4595-4404-475b-8ab6-c7caf6c01ee5"/>
 		</element>
-		<element kind="staticText" uuid="9b25d4eb-172c-492c-99fa-b2f4204f35d1" mode="Opaque" x="280" y="0" width="70" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="9b25d4eb-172c-492c-99fa-b2f4204f35d1" mode="Opaque" x="279" y="0" width="70" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Observações]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cd0ea14c-1f07-4409-afe3-a02af41218fb"/>
 		</element>
-		<element kind="staticText" uuid="99b8e173-5262-4f05-92ca-56c1582541c2" mode="Opaque" x="350" y="0" width="90" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="99b8e173-5262-4f05-92ca-56c1582541c2" mode="Opaque" x="349" y="0" width="90" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Prescrição Médica]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a236fa9-2546-4e25-a44d-cb650e07e9d6"/>
 		</element>
-		<element kind="staticText" uuid="6c51f2fc-05d0-4350-b647-1c051d5b16b9" mode="Opaque" x="160" y="0" width="70" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="6c51f2fc-05d0-4350-b647-1c051d5b16b9" mode="Opaque" x="159" y="0" width="70" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Médico]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4754e5b7-555d-42f8-8689-8ac9612a1bab"/>
 		</element>
-		<element kind="staticText" uuid="c120d07d-0f3f-4d6c-89a3-acd7f02f90c2" mode="Opaque" x="90" y="0" width="70" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="c120d07d-0f3f-4d6c-89a3-acd7f02f90c2" mode="Opaque" x="80" y="0" width="79" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Paciente]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8001d7e-6119-4b76-b0a1-bc42e1a2769d"/>
 		</element>
-		<element kind="staticText" uuid="70382e58-829b-498c-a357-a6e01a282155" mode="Opaque" x="440" y="0" width="50" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="70382e58-829b-498c-a357-a6e01a282155" mode="Opaque" x="439" y="0" width="59" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Data]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38ae4587-c53e-41a9-88d5-46aae6bf1942"/>
 		</element>
-		<element kind="staticText" uuid="1b9e5472-dfb0-4d09-b20c-c97b06c0d700" mode="Opaque" x="490" y="0" width="55" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="1b9e5472-dfb0-4d09-b20c-c97b06c0d700" mode="Opaque" x="498" y="0" width="59" height="25" forecolor="#FFFFFF" backcolor="#969696" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Hora]]></text>
 			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="250a5cb1-ffc4-4aa5-8808-9f2a5885e385"/>
 		</element>
 	</columnHeader>
 	<detail>
-		<band height="79" splitType="Stretch">
-			<element kind="rectangle" uuid="84c1b0bb-3703-4c3a-a313-64d4136cd9b9" x="-10" y="0" width="555" height="30"/>
-			<element kind="textField" uuid="7c3a74f2-f5d6-4ef2-b289-ac8c36a5edba" mode="Opaque" x="-10" y="0" width="100" height="30" backcolor="#F2F2F2" hTextAlign="Center" vTextAlign="Middle">
+		<band height="30" splitType="Stretch">
+			<element kind="rectangle" uuid="8b8c44e2-43bd-4cf4-9dc8-49cfe0e4f65c" mode="Opaque" x="-10" y="0" width="569" height="29" backcolor="#F5F5F5">
+				<printWhenExpression><![CDATA[new java.lang.Boolean($V{REPORT_COUNT} % 2 ==0)]]></printWhenExpression>
+			</element>
+			<element kind="textField" uuid="fdebc98f-56f8-41d7-b4d1-3ad84d4bc6ca" x="-10" y="0" width="90" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{id}]]></expression>
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="09a2b768-b4fa-4731-bafd-dcf6fb8b1321"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
 			</element>
-			<element kind="textField" uuid="02879de8-03f1-42bb-a157-ad3bfba1b282" mode="Opaque" x="230" y="0" width="50" height="30" backcolor="#F2F2F2" hTextAlign="Center" vTextAlign="Middle">
-				<expression><![CDATA[$F{motivo}]]></expression>
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e5ae4595-4404-475b-8ab6-c7caf6c01ee5"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
-			</element>
-			<element kind="textField" uuid="9871e938-8c38-45d1-ad9f-eb86c4f75c49" mode="Opaque" x="280" y="0" width="70" height="30" backcolor="#F2F2F2" hTextAlign="Center" vTextAlign="Middle">
-				<expression><![CDATA[$F{observacoes}]]></expression>
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cd0ea14c-1f07-4409-afe3-a02af41218fb"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
-			</element>
-			<element kind="textField" uuid="b6ffb24f-9d7a-43a5-b4c2-ce33b166df49" mode="Opaque" x="350" y="0" width="90" height="30" backcolor="#F2F2F2" hTextAlign="Center" vTextAlign="Middle">
-				<expression><![CDATA[$F{prescricao_medica}]]></expression>
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2a236fa9-2546-4e25-a44d-cb650e07e9d6"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
-			</element>
-			<element kind="textField" uuid="8f91d662-af21-4d2b-b148-9be38925ac29" mode="Opaque" x="160" y="0" width="70" height="30" backcolor="#F2F2F2" hTextAlign="Center" vTextAlign="Middle">
-				<expression><![CDATA[$F{nome_medico}]]></expression>
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4754e5b7-555d-42f8-8689-8ac9612a1bab"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
-			</element>
-			<element kind="textField" uuid="a2c4b6ed-b875-4ec8-874f-754e8edfad09" mode="Opaque" x="90" y="0" width="70" height="30" backcolor="#F2F2F2" hTextAlign="Center" vTextAlign="Middle">
-				<expression><![CDATA[$F{nome_paciente}]]></expression>
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8001d7e-6119-4b76-b0a1-bc42e1a2769d"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
-			</element>
-			<element kind="textField" uuid="d08c4be9-3ee8-4bf2-b761-85792bf40692" mode="Opaque" x="440" y="0" width="50" height="30" backcolor="#F2F2F2" pattern="M/d/yy" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="9229727a-7286-4b6c-be36-2883e0c91318" x="440" y="0" width="59" height="30" pattern="dd/MM/yyyy" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{data}]]></expression>
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="38ae4587-c53e-41a9-88d5-46aae6bf1942"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0636b567-1f1f-4c00-babe-3f68cbf4ddea"/>
 			</element>
-			<element kind="textField" uuid="0ea2cd8c-3229-4a33-8d9b-a2cac4b125d7" mode="Opaque" x="490" y="0" width="55" height="30" backcolor="#F2F2F2" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="6aaa420a-a10c-4033-99b2-97ebb9e840e2" x="500" y="0" width="59" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{hora}]]></expression>
-				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="250a5cb1-ffc4-4aa5-8808-9f2a5885e385"/>
-				<box>
-					<pen lineWidth="1.0"/>
-				</box>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1121f285-c8e2-43e0-98d6-692bc16a98b8"/>
+			</element>
+			<element kind="textField" uuid="888ab60d-8fa5-47ed-8a63-9780c427e776" x="350" y="0" width="90" height="30" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{prescricao_medica}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3d077c60-802d-4731-a38f-d13a28ea882e"/>
+			</element>
+			<element kind="textField" uuid="f960b655-5e97-4a77-837a-033b8d81e105" x="160" y="0" width="70" height="30" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{nome_medico}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbd3c0ab-85a0-48bd-89d5-dae2ef2bb3d7"/>
+			</element>
+			<element kind="textField" uuid="00f49f45-cbde-4fb2-99fb-ef82ec41fa09" x="80" y="0" width="79" height="30" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{nome_paciente}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="441ac779-906d-499b-83de-edf2d2c69b1d"/>
+			</element>
+			<element kind="textField" uuid="7c0c0aeb-46d2-435c-8162-0e1496bda582" x="230" y="0" width="50" height="30" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{motivo}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d1fc2ab3-2b73-4156-a33b-af316e49b3da"/>
+			</element>
+			<element kind="textField" uuid="f0581d81-7db6-4dfe-8193-1f28d7bbb8f5" x="280" y="0" width="70" height="30" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{observacoes}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f91e2309-062a-45fb-9556-0894993309f8"/>
 			</element>
 		</band>
 	</detail>
-	<columnFooter height="45" splitType="Stretch"/>
-	<pageFooter height="54" splitType="Stretch"/>
+	<columnFooter height="61" splitType="Stretch"/>
+	<pageFooter height="35" splitType="Stretch">
+		<element kind="textField" uuid="a3a1909e-193e-4f6b-95aa-2f442b6879ee" x="444" y="5" width="100" height="30" hTextAlign="Right">
+			<expression><![CDATA["de " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="ea60b238-036f-48eb-bcd9-34f20a93119c" x="345" y="5" width="100" height="30" evaluationTime="Report" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA["Pág." + $V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
 	<summary height="42" splitType="Stretch"/>
+	<noData height="50">
+		<element kind="staticText" uuid="fcd0d081-bcd1-4406-b658-4eab4b4579b2" x="-10" y="14" width="554" height="30" fontSize="13.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Nenhum registro encontrado para os parâmetros passados]]></text>
+		</element>
+	</noData>
 </jasperReport>

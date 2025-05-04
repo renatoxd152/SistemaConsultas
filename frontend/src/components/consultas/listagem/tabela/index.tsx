@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 import { DataTable, DataTableStateEvent } from "primereact/datatable";
+import { Toolbar } from "primereact/toolbar";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Page } from "../../../../app/models/common/page";
@@ -45,19 +46,23 @@ export const TabelaConsultas: React.FC<TabelaConsultasProps> = ({
             </div>
         )
     }
-    const navigate = useNavigate()
+
+  const navigate = useNavigate()
+      const leftToolbarTemplate  = () => {
+          return (
+              <div className="flex flex-wrap gap-2">
+                  <Button label="Adicionar nova consulta" icon="pi pi-plus" severity="success" onClick={() => navigate("/consultas")} />
+                  
+              </div>
+          );
+      };
+  
   return (
     <div className="table-responsive">
            <ConfirmPopup />
-           <div className="d-flex justify-content-end my-3">
-        <Button
-          label="Adicionar nova consulta"
-          className="btn btn-success"
-          icon="pi pi-plus"
-          onClick={() => navigate("/consultas")}
-        />
-      </div>
+
             <Loader show={!consultas}/>
+            <Toolbar className="mb-4" start={leftToolbarTemplate}></Toolbar>   
             <DataTable
             value={consultas.content}
             totalRecords={consultas.totalElements}

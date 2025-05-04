@@ -6,7 +6,7 @@ export interface Consulta
     id:string;
     medico:Medico;
     paciente:Paciente;
-    data:string;
+    data:Date;
     hora:string;
     motivo:string;
     tipo:string;

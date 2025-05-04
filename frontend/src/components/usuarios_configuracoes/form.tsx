@@ -42,12 +42,12 @@ export const ListagemUsuariosTabela: React.FC<ListagemUsuariosProps> = (
             <div>
                 <Button
                 label="Deletar "  
-                className="btn btn-danger btn-sm" 
+                className="btn btn-danger btn-sm m-1" 
                 onClick={(e) => confirmarDelecao(e, usuario)}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
-               <Button label="Editar " className="btn btn-primary btn-sm" onClick={() => navigate(url)}>
+               <Button label="Editar " className="btn btn-primary btn-sm m-1" onClick={() => navigate(url)}>
                   <FontAwesomeIcon icon={faEdit} />
                 </Button>
             </div>

@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { Column } from "primereact/column";
 import { confirmPopup, ConfirmPopup } from 'primereact/confirmpopup';
 import { DataTable, DataTableStateEvent } from "primereact/datatable";
+import { Toolbar } from "primereact/toolbar";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Page } from "../../../../app/models/common/page";
@@ -45,34 +46,37 @@ const actionTemplate = (medicamento:Medicamento)=>
             <div>
                 <Button
                 label="Deletar "  
-                className="btn btn-danger btn-sm" 
+                className="btn btn-danger btn-sm m-1" 
                 onClick={(e) => confirmarDelecao(e, medicamento)}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </Button>
-              <Button label="Editar " className="btn btn-primary btn-sm" onClick={() => navigate(url)}>
+              <Button label="Editar " className="btn btn-primary btn-sm m-1" onClick={() => navigate(url)}>
               <FontAwesomeIcon icon={faEdit} />
               </Button>
             </div>
         )
     }
 
+     const leftToolbarTemplate  = () => {
+              return (
+                  <div className="flex flex-wrap gap-2">
+                      <Button label="Adicionar novo medicamento" icon="pi pi-plus" severity="success" onClick={() => navigate("/medicamentos")} />
+                      
+                  </div>
+              );
+          };
+
   return (
       <div className="container mt-4">
-        <div className="d-flex justify-content-end my-3">
-        <Button
-          label="Adicionar novo medicamento"
-          className="btn btn-success"
-          icon="pi pi-plus"
-          onClick={() => navigate("/medicamentos")}
-        />
-      </div>
+        <Toolbar className="mb-4" start={leftToolbarTemplate}></Toolbar>  
         <div className="card shadow rounded-3">
           
           <div className="card-header bg-primary text-white text-center fw-bold">
             Listagem de Medicamentos
           </div>
           <Loader show={!medicamentos}/>
+          
          <ConfirmPopup />
             <DataTable
               value={medicamentos.content}
