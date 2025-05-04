@@ -13,9 +13,13 @@ export const useUsuarioService = () =>
     const login = async(usuario:Usuario)=>
     {
         const url = `${resourceURL}/login`;
-        const response: AxiosResponse<Usuario> = await httpClient.post<Usuario>(url,usuario);
+        const response: AxiosResponse<Usuario> = await httpClient.post<Usuario>(url, usuario, {
+            withCredentials: true
+        });
         return response.data;
     }
+
+    
    const getById = async (id:number) :Promise<Usuario>=>
     {
         const url = `${resourceURL}/${id}`;
