@@ -26,13 +26,13 @@ export const RelatorioConsultas:React.FC = () =>
             }
            
             service.gerarRelatorioVendas(dataInicialFormatada, dataFinalFormatada).then(blob => {
-                if (!blob || blob.size === 0) {
-                    throw new Error("O relatório está vazio ou não foi gerado.");
-                }
                 const fileURL = URL.createObjectURL(blob);
                 window.open(fileURL);
                 setCarregando(false)
-            });
+            }) .catch(err => {
+                console.error("Erro ao gerar relatório:", err);
+                setCarregando(false)
+            })
         } catch (err) {
             console.error("Erro ao gerar relatório:", err);
         }
