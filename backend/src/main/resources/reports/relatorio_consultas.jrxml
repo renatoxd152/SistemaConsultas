@@ -130,25 +130,25 @@ WHERE
 	</columnHeader>
 	<detail>
 		<band height="30" splitType="Stretch">
-			<element kind="rectangle" uuid="8b8c44e2-43bd-4cf4-9dc8-49cfe0e4f65c" mode="Opaque" x="-10" y="0" width="569" height="29" backcolor="#F5F5F5">
+			<element kind="rectangle" uuid="8b8c44e2-43bd-4cf4-9dc8-49cfe0e4f65c" mode="Opaque" x="-10" y="0" width="566" height="30" backcolor="#F5F5F5">
 				<printWhenExpression><![CDATA[new java.lang.Boolean($V{REPORT_COUNT} % 2 ==0)]]></printWhenExpression>
 			</element>
 			<element kind="textField" uuid="fdebc98f-56f8-41d7-b4d1-3ad84d4bc6ca" x="-10" y="0" width="90" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{id}]]></expression>
 			</element>
-			<element kind="textField" uuid="9229727a-7286-4b6c-be36-2883e0c91318" x="440" y="0" width="59" height="30" pattern="dd/MM/yyyy" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="9229727a-7286-4b6c-be36-2883e0c91318" x="439" y="0" width="59" height="30" pattern="dd/MM/yyyy" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{data}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0636b567-1f1f-4c00-babe-3f68cbf4ddea"/>
 			</element>
-			<element kind="textField" uuid="6aaa420a-a10c-4033-99b2-97ebb9e840e2" x="500" y="0" width="59" height="30" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="6aaa420a-a10c-4033-99b2-97ebb9e840e2" x="498" y="0" width="56" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{hora}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1121f285-c8e2-43e0-98d6-692bc16a98b8"/>
 			</element>
-			<element kind="textField" uuid="888ab60d-8fa5-47ed-8a63-9780c427e776" x="350" y="0" width="90" height="30" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="888ab60d-8fa5-47ed-8a63-9780c427e776" x="349" y="0" width="90" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{prescricao_medica}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3d077c60-802d-4731-a38f-d13a28ea882e"/>
 			</element>
-			<element kind="textField" uuid="f960b655-5e97-4a77-837a-033b8d81e105" x="160" y="0" width="70" height="30" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="f960b655-5e97-4a77-837a-033b8d81e105" x="159" y="0" width="70" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{nome_medico}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bbd3c0ab-85a0-48bd-89d5-dae2ef2bb3d7"/>
 			</element>
@@ -156,11 +156,11 @@ WHERE
 				<expression><![CDATA[$F{nome_paciente}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="441ac779-906d-499b-83de-edf2d2c69b1d"/>
 			</element>
-			<element kind="textField" uuid="7c0c0aeb-46d2-435c-8162-0e1496bda582" x="230" y="0" width="50" height="30" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="7c0c0aeb-46d2-435c-8162-0e1496bda582" x="229" y="0" width="50" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{motivo}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d1fc2ab3-2b73-4156-a33b-af316e49b3da"/>
 			</element>
-			<element kind="textField" uuid="f0581d81-7db6-4dfe-8193-1f28d7bbb8f5" x="280" y="0" width="70" height="30" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="textField" uuid="f0581d81-7db6-4dfe-8193-1f28d7bbb8f5" x="279" y="0" width="70" height="30" hTextAlign="Center" vTextAlign="Middle">
 				<expression><![CDATA[$F{observacoes}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f91e2309-062a-45fb-9556-0894993309f8"/>
 			</element>
