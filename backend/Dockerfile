@@ -3,7 +3,9 @@ FROM ubuntu:latest AS build
 RUN apt-get update
 RUN apt-get install openjdk-21-jdk -y
 RUN apt-get install maven -y
-
+RUN apk add --no-cache freetype fontconfig
+RUN apk add --no-cache msttcorefonts-installer fontconfig
+RUN update-ms-fonts
 WORKDIR /app
 COPY . .
 
