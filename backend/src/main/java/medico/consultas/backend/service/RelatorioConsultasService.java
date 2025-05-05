@@ -53,6 +53,10 @@ public class RelatorioConsultasService {
 			parametros.put("DATA_FIM", dataFim);
 			System.out.println("Parâmetros adicionados ao relatório.");
 
+			System.out.println("Parâmetros enviados: " + parametros);
+			System.out.println("Conexão válida? " + !connection.isClosed());
+			
+			
 			JasperPrint print = JasperFillManager.fillReport(compileReport, parametros, connection);
 			System.out.println("Relatório preenchido com dados.");
 
