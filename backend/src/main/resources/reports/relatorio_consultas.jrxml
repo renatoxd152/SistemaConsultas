@@ -166,7 +166,7 @@ WHERE
 	</detail>
 	<columnFooter height="61" splitType="Stretch"/>
 	<pageFooter height="35" splitType="Stretch">
-		<element kind="textField" uuid="a3a1909e-193e-4f6b-95aa-2f442b6879ee" x="444" y="5" width="100" height="30" hTextAlign="Right">
+		<element kind="textField" uuid="a3a1909e-193e-4f6b-95aa-2f442b6879ee" x="444" y="5" width="112" height="30" hTextAlign="Center" vTextAlign="Middle">
 			<expression><![CDATA["de " + $V{PAGE_NUMBER}]]></expression>
 		</element>
 		<element kind="textField" uuid="ea60b238-036f-48eb-bcd9-34f20a93119c" x="345" y="5" width="100" height="30" evaluationTime="Report" hTextAlign="Center" vTextAlign="Middle">
@@ -174,7 +174,7 @@ WHERE
 		</element>
 	</pageFooter>
 	<summary height="42" splitType="Stretch"/>
-	<noData height="50">
+	<noData height="44">
 		<element kind="staticText" uuid="fcd0d081-bcd1-4406-b658-4eab4b4579b2" x="-10" y="14" width="554" height="30" fontSize="13.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Nenhum registro encontrado para os parâmetros passados]]></text>
 		</element>
