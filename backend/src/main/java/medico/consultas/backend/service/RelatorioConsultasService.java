@@ -30,32 +30,49 @@ public class RelatorioConsultasService {
 	
 	@Autowired
 	private DataSource dataSource;
-	public byte[] gerarRelatorio(Date dataInicio,Date dataFim)
-	{
-		try(Connection connection = dataSource.getConnection()) {
-			JasperReport compileReport = JasperCompileManager.
-					compileReport(relatorioConsultas.getInputStream());
-			
+	public byte[] gerarRelatorio(Date dataInicio, Date dataFim) {
+		System.out.println("Iniciando geração do relatório...");
+		System.out.println("Data Início: " + dataInicio);
+		System.out.println("Data Fim: " + dataFim);
+
+		try (Connection connection = dataSource.getConnection()) {
+			System.out.println("Conexão com o banco de dados estabelecida.");
+
+			if (!relatorioConsultas.exists()) {
+				System.out.println("Arquivo de relatório não encontrado.");
+				return null;
+			} else {
+				System.out.println("Arquivo de relatório encontrado: " + relatorioConsultas.getFilename());
+			}
+
+			JasperReport compileReport = JasperCompileManager.compileReport(relatorioConsultas.getInputStream());
+			System.out.println("Relatório compilado com sucesso.");
+
 			Map<String, Object> parametros = new HashMap<>();
-	
 			parametros.put("DATA_INICIO", dataInicio);
-			parametros.put("DATA_FIM",dataFim);
-			
-			JasperPrint print = JasperFillManager.fillReport(compileReport, parametros,connection);
-			
-			return JasperExportManager.exportReportToPdf(print);
-		
+			parametros.put("DATA_FIM", dataFim);
+			System.out.println("Parâmetros adicionados ao relatório.");
+
+			JasperPrint print = JasperFillManager.fillReport(compileReport, parametros, connection);
+			System.out.println("Relatório preenchido com dados.");
+
+			byte[] pdf = JasperExportManager.exportReportToPdf(print);
+			System.out.println("Relatório exportado para PDF com sucesso.");
+
+			return pdf;
+
 		} catch (SQLException e) {
+			System.out.println("Erro de SQL ao gerar o relatório:");
+			e.printStackTrace();
+		} catch (JRException e) {
+			System.out.println("Erro do JasperReports ao gerar o relatório:");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Erro de IO ao acessar o arquivo do relatório:");
 			e.printStackTrace();
 		}
-		catch(JRException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+
+		System.out.println("Falha ao gerar o relatório. Retornando null.");
 		return null;
 	}
 }
