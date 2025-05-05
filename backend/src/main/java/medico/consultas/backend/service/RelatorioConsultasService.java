@@ -21,6 +21,8 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
+
+
 @Service
 public class RelatorioConsultasService {
 	@Value("classpath:reports/relatorio_consultas.jrxml")
