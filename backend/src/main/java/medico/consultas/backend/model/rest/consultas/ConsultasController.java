@@ -71,34 +71,43 @@ public class ConsultasController {
 	}
 	
 	@GetMapping("/relatorio-consultas")
-	public ResponseEntity<byte[]> relatorioConsultas(@RequestParam(value="inicio",required=false,defaultValue="")String inicio,
-			@RequestParam(value="fim",required=false,defaultValue="")String fim)
-	{
-		
-		Date dataInicio=DateUtils.fromString(inicio);
-		Date dataFim=DateUtils.fromString(fim,true);
-		
-		if(dataInicio == null)
-		{
-			dataInicio = DateUtils.fromString("01/01/1970");
-		}
-		
-		if(dataFim == null)
-		{
-			dataFim = DateUtils.hoje(true);
-		}
-		
-		
-		var relatorioGerado = relatorioConsultasService.gerarRelatorio(dataInicio,dataFim);
-		HttpHeaders headers = new HttpHeaders();
-		var fileName = "relatorio-consultas.pdf";
-		
-		headers.setContentDispositionFormData("inline;filename=\"" + fileName + "\"",fileName);
-		headers.setCacheControl("must-revalidate,post-check=0,pre-check=0");
-		
-		var responseEntity = new ResponseEntity<>(relatorioGerado,headers,HttpStatus.OK);
-		
-		return responseEntity;
+	public ResponseEntity<byte[]> relatorioConsultas(
+	        @RequestParam(value = "inicio", required = false, defaultValue = "") String inicio,
+	        @RequestParam(value = "fim", required = false, defaultValue = "") String fim) {
+
+	    System.out.println("Requisição recebida para geração do relatório.");
+	    System.out.println("Parâmetro 'inicio': " + inicio);
+	    System.out.println("Parâmetro 'fim': " + fim);
+
+	    Date dataInicio = DateUtils.fromString(inicio);
+	    Date dataFim = DateUtils.fromString(fim, true);
+
+	    if (dataInicio == null) {
+	        dataInicio = DateUtils.fromString("01/01/1970");
+	        System.out.println("Data de início não informada. Usando valor padrão: " + dataInicio);
+	    }
+
+	    if (dataFim == null) {
+	        dataFim = DateUtils.hoje(true);
+	        System.out.println("Data de fim não informada. Usando valor atual: " + dataFim);
+	    }
+
+	    byte[] relatorioGerado = relatorioConsultasService.gerarRelatorio(dataInicio, dataFim);
+
+	    if (relatorioGerado == null || relatorioGerado.length == 0) {
+	        System.out.println("Relatório não foi gerado ou está vazio.");
+	    } else {
+	        System.out.println("Relatório gerado com sucesso. Tamanho em bytes: " + relatorioGerado.length);
+	    }
+
+	    HttpHeaders headers = new HttpHeaders();
+	    String fileName = "relatorio-consultas.pdf";
+
+	    headers.setContentDispositionFormData("inline;filename=\"" + fileName + "\"", fileName);
+	    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+	    return new ResponseEntity<>(relatorioGerado, headers, HttpStatus.OK);
 	}
+
 	
 }
