@@ -1,6 +1,6 @@
 FROM ubuntu:latest AS build
 
-RUN apt-get update && apt-get install -y libfreetype6
+RUN apt-get update && apt-get install -y fontconfig fonts-dejavu
 RUN apt-get install openjdk-21-jdk -y
 RUN apt-get install maven -y
 
