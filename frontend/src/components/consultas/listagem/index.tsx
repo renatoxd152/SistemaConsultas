@@ -30,17 +30,21 @@ export const ListagemConsultas: React.FC = () =>
         })
     }
 
-      const handlePage = (event: DataTableStateEvent | null) => {
-        service
-          .pages(event?.page, event?.rows)
-          .then((result) => {
+     const handlePage = (event: DataTableStateEvent | null) => {
+    console.log("FILTRO ACESSO NO HANDLE PAGE",event?.filters)
+    const searchTerm = (event?.filters?.global as { value: string })?.value || '';
+    
+    console.log("Termo de busca:", event?.filters);
+    
+    service
+        .pages(event?.page, event?.rows, searchTerm)
+        .then((result) => {
             setConsultas({ ...result, first: event?.first ?? 0 });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
-
+        })
+        .catch((error) => {
+            console.error("Erro ao buscar consultas:", error);
+        });
+};
        useEffect(() => {
           service
             .pages(0, 10)

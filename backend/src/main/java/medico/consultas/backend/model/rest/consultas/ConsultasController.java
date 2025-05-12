@@ -52,13 +52,23 @@ public class ConsultasController {
 	{
 		return consultasRepository.findAll().stream().map(ConsultasFormRequest::fromModel).collect(Collectors.toList());
 	}
-	
+	/*
 	@GetMapping("/listar/paginas")
 	public Page<ConsultasFormRequest> getLista(Pageable pageable)
 	{
 		return consultasRepository.findAll(pageable).map(ConsultasFormRequest::fromModel);
 	}
+	*/
 	
+	@GetMapping("/listar/paginas")
+	public Page<ConsultasFormRequest> getLista(Pageable pageable,
+			 @RequestParam(value = "busca", required = false, defaultValue = "") String busca)
+	{
+		return consultasRepository.buscarPorNome(busca, pageable).map(ConsultasFormRequest::fromModel);
+	}
+	
+	
+
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<Object> delete(@PathVariable Long id)

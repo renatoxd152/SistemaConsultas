@@ -30,13 +30,18 @@ export const useConsultaService = () =>
         return new Blob([bytes],{type:'application/pdf'})
     }
 
-       const pages = async( page:number =0,
-            size:number =10):Promise<Page<Consulta>> =>
-        {
-            const url = `${resourceURL}/listar/paginas?page=${page}&size=${size}`
-            const response: AxiosResponse<Page<Consulta>> = await httpClient.get(url);
-            return response.data;
+    const pages = async (page: number = 0, size: number = 10, busca: string = ''): Promise<Page<Consulta>> => {
+        console.log("BUSCA TESTE:",busca)
+        let url = `${resourceURL}/listar/paginas?page=${page}&size=${size}`;
+
+        if (busca && busca.trim().length > 0) {
+            url += `&busca=${busca.trim()}`;
         }
+
+        const response: AxiosResponse<Page<Consulta>> = await httpClient.get(url);
+        return response.data;
+    };
+
 
     return{
         salvar,
